@@ -110,4 +110,8 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  config.session_store :redis_store,
+    servers: %w(redis://localhost:6379/0/session),
+    expire_after: 90.minutes,
+    key: "_#{Rails.application.class.module_parent_name.downcase}_session"
 end
