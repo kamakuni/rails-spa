@@ -4,5 +4,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
+    user = User.new(name: params[:name],email: params[:email])
+    if user.save then
+      render json: {:status => "SUCCESS"}
+    else
+      render json: {:status => "ERROR"}
+    end
   end
 end
