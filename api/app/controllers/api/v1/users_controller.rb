@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
     if user.save then
       render json: {:status => "SUCCESS"}
     else
-      render json: {:status => "ERROR"}
+      render status:500 json: {:status => "ERROR"}
     end
   end
 end
