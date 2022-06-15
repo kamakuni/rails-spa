@@ -6,11 +6,11 @@ Rails.application.routes.draw do
       get 'cards/create'
       get 'lists/index'
       get 'lists/create'
-      get 'users/index'
+      get '/users' => 'users#index'
 #      get 'users/create'
-      post 'signup' => 'users#create'
-      post 'sessions/create'
-      delete 'sessions/destory'
+      post '/signup' => 'users#create'
+      post '/login' => 'sessions#create'
+      delete '/logout' => 'sessions#destory'
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
