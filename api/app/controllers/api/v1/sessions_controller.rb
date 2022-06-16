@@ -5,7 +5,7 @@ class Api::V1::SessionsController < ApplicationController
       session[:user_id] = user.id
       render json: {:status => "SUCCESS"} 
     else
-      render status:500 json: {:status => "ERROR"}
+      render status:500, json: {:status => "ERROR"}
     end
     #session[:user_id] = user.id
   end

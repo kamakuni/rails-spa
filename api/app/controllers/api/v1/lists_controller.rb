@@ -1,9 +1,27 @@
 class Api::V1::ListsController < ApplicationController
   def index
-    render json: List.all
+    if session[:user_id] then
+      render json: List.where(user_id:session[:user_id])
+    else
+      render status:401, json: {:status => "ERROR"}
+    end
   end
 
   def create
-    render json: {}
+    list = List.new(title: params[:title], user_id:session[:user_id])
+    if list.save! then
+      render json: {:action=>"create"}
+    else
+      render status:500, json: {:status => "ERROR"}
+    end
   end
+
+  def show
+    render json: {:action=>params[:id]}
+  end
+
+  def destory
+    render json: {:action=>"destory"}
+  end
+
 end
