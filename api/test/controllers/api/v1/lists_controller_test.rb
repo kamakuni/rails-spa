@@ -5,7 +5,7 @@ class Api::V1::ListsControllerTest < ActionDispatch::IntegrationTest
     get api_v1_lists_index_url
     assert_response :success
     lists = @response.parsed_body
-    assert_equal "MyString" lists[0][:name]
+    assert_equal "MyString", lists[0].title
   end
 
   test "should get create" do

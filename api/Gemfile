@@ -41,3 +41,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Use redis for a cache
 gem 'redis-actionpack'
+
+gem 'rubocop', require:false
+gem 'rubocop-rails', require:false
