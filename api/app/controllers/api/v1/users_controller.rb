@@ -1,15 +1,9 @@
 # UsersController
 class Api::V1::UsersController < ApplicationController
-  def index
-    render json: User.all
-  end
-
   def create
-    user = User.new(name: params[:name], email: params[:email], password: params[:password])
-    if user.save
-      render json: { status: "SUCCESS" }
-    else
-      render status: 500, json: { status: "ERROR" }
-    end
+    user = User.create!(name: params[:name], email: params[:email], password: params[:password])
+    render json: { name: user.name, email: user.email }
+  rescue ActiveRecord::RecordInvalid => e
+    render status: 400, json: { message: e.message }
   end
 end
