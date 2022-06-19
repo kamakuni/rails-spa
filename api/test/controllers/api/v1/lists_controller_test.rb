@@ -1,12 +1,30 @@
 require "test_helper"
 
 class Api::V1::ListsControllerTest < ActionDispatch::IntegrationTest
-  #test "get all of lists" do
-  #  get api_v1_lists_url
-  #end
+  test 'create new list' do
+    name = 'test1'
+    email = 'test1@test.com'
+    password = 'test1'
+    post api_v1_signup_url, params: { name: name, email: email, password: password }
+    post api_v1_login_url, params: { email: email, password: password }
+    post api_v1_lists_url, params: { title: "test1" }
+    assert_response :success
+    res = @response.parsed_body
+    assert_equal "test1", res['title']
+  end
 
-  #  test "should get create" do
-  #    get api_v1_lists_create_url
-  #    assert_response :success
-  #  end
+  test "get all of lists" do
+    name = 'test1'
+    email = 'test1@test.com'
+    password = 'test1'
+    post api_v1_signup_url, params: { name: name, email: email, password: password }
+    post api_v1_login_url, params: { email: email, password: password }
+    post api_v1_lists_url, params: { title: "test1" }
+    post api_v1_lists_url, params: { title: "test2" }
+    get api_v1_lists_url
+    assert_response :success
+    lists = @response.parsed_body
+    assert_equal "test1", lists[0]['title']
+    assert_equal "test2", lists[1]['title']
+  end
 end

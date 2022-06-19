@@ -3,11 +3,7 @@ class Api::V1::ListsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if session[:user_id]
-      render json: List.where(user_id: session[:user_id])
-    else
-      render status: 401, json: { status: "ERROR" }
-    end
+    render json: List.where(user_id: session[:user_id])
   end
 
   def create
