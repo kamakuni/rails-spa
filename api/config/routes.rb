@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       post '/signup' => 'users#create'
       post '/login' => 'sessions#create'
       delete '/logout' => 'sessions#destory'
-      resources :lists, only: %i[index create update destory]
+      resources :lists#, only: %i[index create update destory]
       # resources :cards
     end
   end

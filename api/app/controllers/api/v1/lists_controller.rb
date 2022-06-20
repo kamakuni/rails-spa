@@ -14,10 +14,35 @@ class Api::V1::ListsController < ApplicationController
   end
 
   def show
-    render json: { action: params[:id] }
+    list = List.find(params[:id])
+    render json: list
+  rescue ActiveRecord::RecordNotFound => e
+    render status: 404, json: { message: e.message }
   end
 
-  def destory
-    render json: { action: "destory" }
+  def update
+    begin
+      list = List.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render status: 404, json: { message: e.message }
+    end
+    begin
+      list.update!(title: params[:title])
+      render json: list
+    rescue ActiveRecord::RecordInvalid => e
+      render status: 400, json: { message: e.message }
+    end
+  end
+
+  def destroy
+    begin
+      list = List.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render status: 404, json: { message: e.message }
+    end
+    list.destroy
+    render json: { message: "List is deleted." }
+  rescue ActiveRecord::RecordInvalid => e
+    render json: { message: e.message }
   end
 end
