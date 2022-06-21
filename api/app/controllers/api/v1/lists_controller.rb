@@ -40,9 +40,11 @@ class Api::V1::ListsController < ApplicationController
     rescue ActiveRecord::RecordNotFound => e
       render status: 404, json: { message: e.message }
     end
-    list.destroy
-    render json: { message: "List is deleted." }
-  rescue ActiveRecord::RecordInvalid => e
-    render json: { message: e.message }
+    begin
+      list.destroy
+      render json: { message: "List is deleted." }
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { message: e.message }
+    end
   end
 end
