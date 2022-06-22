@@ -31,3 +31,17 @@ services:
     volumes:
       - ./api:/app
     command: bash -c "rm -f tmp/pids/server.pid & bundle exec rails s -p 3000 -b '0.0.0.0'"
+
+  front:
+    build:
+      context: ./front/
+      dockerfile: Dockerfile
+    volumes:
+      - ./front/:/app
+    #      - node_modules:/code/app/node_modules
+    command: sh -c "cd app && yarn && yarn start"
+    ports:
+      - 4000:3000
+
+volumes:
+  node_modules: null
