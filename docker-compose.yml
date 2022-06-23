@@ -37,11 +37,11 @@ services:
       context: ./front/
       dockerfile: Dockerfile
     volumes:
-      - ./front/:/app
-    #      - node_modules:/code/app/node_modules
-    command: sh -c "cd app && yarn && yarn start"
+      - ./front/app:/app
+      - node_modules:/app/node_modules
+    command: sh -c "yarn && PORT=3001 yarn start"
     ports:
-      - 4000:3000
+      - 3001:3001
 
 volumes:
   node_modules: null
