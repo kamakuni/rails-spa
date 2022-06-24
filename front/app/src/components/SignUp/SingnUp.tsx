@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-function SignUp() {
+/*interface SignUpProps {
+    email: string;
+    password: string;
+}*/
+
+const SignUp: FC = props => {
+    //const { email, password } = props;
     return (
-        <div>
-            <h2>SignUp</h2>
-        </div>
+        <form>
+            <label>
+                Email:
+                <input type="text" />
+            </label>
+            <label>
+                Password:
+                <input type="text" />
+            </label>
+            <input type="submit" value="Submit" />
+        </form>
     );
 }
 
