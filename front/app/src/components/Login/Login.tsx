@@ -24,6 +24,8 @@ const Login: React.FC = () => {
         axios.post('http://localhost:3000/api/v1/login', {
             email: email,
             password: password
+        }, {
+            withCredentials: true
         }).then((res) => {
             console.log(res)
             navigate("/dashboard")
