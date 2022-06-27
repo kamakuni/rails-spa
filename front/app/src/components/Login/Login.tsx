@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Login: React.FC = () => {
@@ -28,12 +28,18 @@ const Login: React.FC = () => {
             withCredentials: true
         }).then((res) => {
             console.log(res)
-            navigate("/dashboard")
+            setIsLoggedIn(true)
         }).catch((e) => {
             console.log(e.response.status)
-            // TODO: error handling
+            setIsLoggedIn(false)
         })
     }
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate("/dashboard")
+        }
+    })
 
     return (
         <div>
