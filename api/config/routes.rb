@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/users' => 'users#index'
       post '/signup' => 'users#create'
+      get '/login' => 'sessions#index' 
       post '/login' => 'sessions#create'
       delete '/logout' => 'sessions#destory'
       resources :lists#, only: %i[index create update destory]

@@ -1,6 +1,10 @@
 # SessionsController
 class Api::V1::SessionsController < ApplicationController
-  before_action :authenticate_user!, only: [:destory, :show]
+  before_action :authenticate_user!, only: [:index, :destory]
+
+  def index
+    render status: 200, json: { message: "Users is authorized." }    
+  end
 
   def create
     user = User.find_by(email: params[:email])
@@ -15,10 +19,6 @@ class Api::V1::SessionsController < ApplicationController
   def destory
     session.delete(:user_id)
     render json: { message: "You have successfully logged out." }
-  end
-
-  def show
-    render json: { message: "Users is authorized." }    
   end
 
 end
