@@ -7,6 +7,7 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import { NavLink } from 'react-router-dom';
+import ProtectedRoutes from './auth/ProtectedRoutes';
 
 function App() {
 
@@ -24,7 +25,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route element={<ProtectedRoutes />} >
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div >
