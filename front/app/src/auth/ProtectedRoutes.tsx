@@ -20,8 +20,8 @@ const useAuth = (): User => {
 }
 
 const ProtectedRoutes = () => {
-    const isAuth = useAuth()
-    return isAuth ? <Outlet /> : <Login />
+    const auth = useAuth()
+    return auth && auth.loggedIn ? <Outlet /> : <Login />
 }
 
 export default ProtectedRoutes;
