@@ -7,7 +7,6 @@ const Login: React.FC = () => {
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
     const [isLoggedIn, setIsLoggedIn] = React.useState(false)
-    const navigate = useNavigate();
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
@@ -34,12 +33,6 @@ const Login: React.FC = () => {
             setIsLoggedIn(false)
         })
     }
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            navigate("/dashboard")
-        }
-    })
 
     return (
         <div>
