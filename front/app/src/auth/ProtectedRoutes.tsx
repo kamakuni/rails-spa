@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { Outlet } from 'react-router'
+import { Navigate } from 'react-router-dom'
 import Login from '../components/Login/Login'
 
 interface User {
@@ -21,7 +22,7 @@ const useAuth = (): User => {
 
 const ProtectedRoutes = () => {
     const auth = useAuth()
-    return auth && auth.loggedIn ? <Outlet /> : <Login />
+    return auth && auth.loggedIn ? <Outlet /> : <Navigate to="/login" replace />
 }
 
 export default ProtectedRoutes;
