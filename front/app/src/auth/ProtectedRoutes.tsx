@@ -31,7 +31,7 @@ const ProtectedRoutes = () => {
         const fetch = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/v1/login', { withCredentials: true });
-                if (response.status == 200) {
+                if (!auth && response.status == 200) {
                     setAuth(true)
                 }
                 console.log(response)
