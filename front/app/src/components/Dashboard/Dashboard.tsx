@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createReadStream } from 'fs';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { convertCompilerOptionsFromJson } from 'typescript';
 
 interface List {
     title: string
@@ -20,7 +21,11 @@ function Dashboard() {
         const copyed = [...lists]
         copyed.push({ title: title })
         setLists(copyed)
-        console.log(title)
+    }
+
+    const removeList = (i: number) => {
+        const filtered = lists.filter((l, index) => { return i != index })
+        setLists(filtered)
     }
 
     return (
@@ -37,11 +42,11 @@ function Dashboard() {
             <div>
                 <ul>
                     {lists.map((list, i) => {
-                        return <li>
+                        return <li key={i}>
                             <label>{list.title}</label>
                             <div>
                                 <button>Add Cards</button>
-                                <button>Remove List</button>
+                                <button onClick={() => removeList(i)}>Remove List</button>
                             </div>
                         </li>
                     })}
