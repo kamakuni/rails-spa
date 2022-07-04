@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { createReadStream } from 'fs';
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { convertCompilerOptionsFromJson } from 'typescript';
 
 interface Card {
     title: string
