@@ -14,14 +14,12 @@ interface List {
     cards: Card[]
 }
 
-function Dashboard() {
+interface CardProps {
+    title: string
+    body: string
+}
 
-    const [title, setTitle] = useState("")
-    const [lists, setLists] = useState<Array<List>>([])
-
-    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.target.value)
-    }
+function Card(props: CardProps) {
 
     const handleCardTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log("handleCardTitleChange")
@@ -31,6 +29,33 @@ function Dashboard() {
     const handleCardBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log("handleCardBodyChange")
         //setTitle(e.target.value)
+    }
+
+    return (
+        <li>
+            <div>
+                <div>
+                    <label>title</label>
+                    <input onChange={handleCardTitleChange}></input>
+                </div>
+                <div>
+                    <label>body</label>
+                    <input onChange={handleCardBodyChange}></input>
+                </div>
+            </div>
+            <div>{props.title}</div>
+            <div>{props.body}</div>
+        </li>
+    )
+}
+
+function Dashboard() {
+
+    const [title, setTitle] = useState("")
+    const [lists, setLists] = useState<Array<List>>([])
+
+    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value)
     }
 
     const handleAddListClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -61,20 +86,7 @@ function Dashboard() {
                         return <li key={i}>
                             <label>{list.title}</label>
                             {list.cards.map((card, i) => {
-                                return <li>
-                                    <div>
-                                        <div>
-                                            <label>title</label>
-                                            <input onChange={handleCardTitleChange}></input>
-                                        </div>
-                                        <div>
-                                            <label>body</label>
-                                            <input onChange={handleCardBodyChange}></input>
-                                        </div>
-                                    </div>
-                                    <div>{card.title}</div>
-                                    <div>{card.body}</div>
-                                </li>
+                                return <Card title={card.title} body={card.body} />
                             })}
                             <div>
                                 <button>Add Cards</button>
