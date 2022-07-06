@@ -53,13 +53,13 @@ function Dashboard() {
         setLists(copyed)
     }
 
-    const handleCardTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log("handleCardTitleChange")
+    const cardTitleChange = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(i)
         //setTitle(e.target.value)
     }
 
-    const handleCardBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log("handleCardBodyChange")
+    const cardBodyChange = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(i)
         //setTitle(e.target.value)
     }
 
@@ -86,11 +86,11 @@ function Dashboard() {
                                 <div>
                                     <div>
                                         <label>title</label>
-                                        <input onChange={handleCardTitleChange}></input>
+                                        <input onChange={(e) => { cardTitleChange(i, e) }}></input>
                                     </div>
                                     <div>
                                         <label>body</label>
-                                        <input onChange={handleCardBodyChange}></input>
+                                        <input onChange={(e) => { cardBodyChange(i, e) }}></input>
                                     </div>
                                 </div>
                                 <button onClick={() => addCards(i)} >Add Cards</button>
