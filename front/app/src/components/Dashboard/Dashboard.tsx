@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { createReadStream } from 'fs';
 import React, { useEffect, useState } from 'react'
 
 interface Card {
@@ -19,30 +18,16 @@ interface CardProps {
 
 function Card(props: CardProps) {
 
-    const cardTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value);
-        //setTitle(e.target.value)
-    }
-
-    const cardBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value);
-        //setTitle(e.target.value)
-    }
-
     return (
         <div>
-            <li>
-                <div>{props.title}</div>
-                <div>{props.body}</div>
-            </li>
             <div>
                 <div>
-                    <label>title</label>
-                    <input onChange={cardTitleChange}></input>
+                    <label>title:</label>
+                    {props.title}
                 </div>
                 <div>
-                    <label>body</label>
-                    <input onChange={cardBodyChange}></input>
+                    <label>body:</label>
+                    {props.body}
                 </div>
             </div>
         </div>
@@ -53,6 +38,7 @@ function Dashboard() {
 
     const [title, setTitle] = useState("")
     const [lists, setLists] = useState<Array<List>>([])
+    const [card, setCard] = useState<CardProps>({ title: "", body: "" })
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
@@ -64,15 +50,38 @@ function Dashboard() {
         setLists(copyed)
     }
 
-    const removeList = (i: number) => {
+    const handleRemoveList = (i: number) => {
         const filtered = lists.filter((l, index) => { return i != index })
         setLists(filtered)
     }
 
-    const addCards = (i: number) => {
+    const handleUpdateCards = (i: number, j: number) => {
         const copyed = [...lists]
-        copyed[i].cards.push({ "title": "title", "body": "body" })
+        copyed[i].cards[j].title = card.title
+        copyed[i].cards[j].body = card.body
         setLists(copyed)
+    }
+
+    const handleRemoveCards = (i: number, j: number) => {
+        const copyed = [...lists]
+        copyed[i].cards = copyed[i].cards.filter((c, index) => { return j != index })
+        setLists(copyed)
+    }
+
+    const handleAddCards = (i: number) => {
+        const copyed = [...lists]
+        copyed[i].cards.push({ "title": "", "body": "" })
+        setLists(copyed)
+    }
+
+    const handleCardTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCard({ title: e.target.value, body: card.body })
+    }
+
+    const handleCardBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value);
+        //setTitle(e.target.value)
+        setCard({ title: card.title, body: e.target.value })
     }
 
     return (
@@ -91,12 +100,20 @@ function Dashboard() {
                     {lists.map((list, i) => {
                         return <li key={i}>
                             <label>{list.title}</label>
-                            {list.cards.map((card, i) => {
-                                return <Card title={card.title} body={card.body} />
+                            {list.cards.map((card, j) => {
+                                return (
+                                    <div>
+                                        <Card title={card.title} body={card.body} />
+                                        <input onChange={handleCardTitleChange}></input>
+                                        <input onChange={handleCardBodyChange}></input>
+                                        <button onClick={() => handleUpdateCards(i, j)} >Update Cards</button>
+                                        <button onClick={() => handleRemoveCards(i, j)} >Delete Cards</button>
+                                    </div>
+                                )
                             })}
                             <div>
-                                <button onClick={() => addCards(i)} >Add Cards</button>
-                                <button onClick={() => removeList(i)}>Remove List</button>
+                                <button onClick={() => handleAddCards(i)} >Add Cards</button>
+                                <button onClick={() => handleRemoveList(i)}>Remove List</button>
                             </div>
                         </li>
                     })}
