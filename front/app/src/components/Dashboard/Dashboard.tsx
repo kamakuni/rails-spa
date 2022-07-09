@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 interface Card {
@@ -12,8 +11,10 @@ interface List {
 }
 
 interface CardProps {
-    title: string
     body: string
+    title: string
+    onBodyChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    onTitleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 function Card(props: CardProps) {
@@ -29,6 +30,8 @@ function Card(props: CardProps) {
                     <label>body:</label>
                     {props.body}
                 </div>
+                <input onChange={props.onTitleChange}></input>
+                <input onChange={props.onBodyChange}></input>
             </div>
         </div>
     )
@@ -38,7 +41,7 @@ function Dashboard() {
 
     const [title, setTitle] = useState("")
     const [lists, setLists] = useState<Array<List>>([])
-    const [card, setCard] = useState<CardProps>({ title: "", body: "" })
+    const [card, setCard] = useState<Card>({ title: "", body: "", })
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
@@ -55,13 +58,6 @@ function Dashboard() {
         setLists(filtered)
     }
 
-    const handleUpdateCards = (i: number, j: number) => {
-        const copyed = [...lists]
-        copyed[i].cards[j].title = card.title
-        copyed[i].cards[j].body = card.body
-        setLists(copyed)
-    }
-
     const handleRemoveCards = (i: number, j: number) => {
         const copyed = [...lists]
         copyed[i].cards = copyed[i].cards.filter((c, index) => { return j != index })
@@ -74,14 +70,16 @@ function Dashboard() {
         setLists(copyed)
     }
 
-    const handleCardTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCard({ title: e.target.value, body: card.body })
+    const handleCardTitleChange = (value: string, i: number, j: number) => {
+        const copyed = [...lists]
+        copyed[i].cards[j] = { title: value, body: copyed[i].cards[j].body }
+        setLists(copyed)
     }
 
-    const handleCardBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value);
-        //setTitle(e.target.value)
-        setCard({ title: card.title, body: e.target.value })
+    const handleCardBodyChange = (value: string, i: number, j: number) => {
+        const copyed = [...lists]
+        copyed[i].cards[j] = { title: copyed[i].cards[j].title, body: value }
+        setLists(copyed)
     }
 
     return (
@@ -103,10 +101,11 @@ function Dashboard() {
                             {list.cards.map((card, j) => {
                                 return (
                                     <div>
-                                        <Card title={card.title} body={card.body} />
-                                        <input onChange={handleCardTitleChange}></input>
-                                        <input onChange={handleCardBodyChange}></input>
-                                        <button onClick={() => handleUpdateCards(i, j)} >Update Cards</button>
+                                        <Card
+                                            onBodyChange={(e) => handleCardBodyChange(e.target.value, i, j)}
+                                            onTitleChange={(e) => handleCardTitleChange(e.target.value, i, j)}
+                                            body={card.body}
+                                            title={card.title} />
                                         <button onClick={() => handleRemoveCards(i, j)} >Delete Cards</button>
                                     </div>
                                 )
