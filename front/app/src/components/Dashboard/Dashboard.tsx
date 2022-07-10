@@ -41,7 +41,6 @@ function Dashboard() {
 
     const [title, setTitle] = useState("")
     const [lists, setLists] = useState<Array<List>>([])
-    const [card, setCard] = useState<Card>({ title: "", body: "", })
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
