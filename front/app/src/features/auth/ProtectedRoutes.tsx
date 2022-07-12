@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 import { Outlet } from 'react-router'
 import { Navigate } from 'react-router-dom'
-import Login from '../components/Login/Login'
 
 // https://v5.reactrouter.com/web/example/auth-workflow
 
