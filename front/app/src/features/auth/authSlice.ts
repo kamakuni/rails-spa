@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { findAllByTestId } from "@testing-library/react";
+import LoginUser from "./models/LoginUser";
 import NewUser from "./models/NewUser";
 import authService from "./services/authService";
 
@@ -32,6 +33,28 @@ export const register = createAsyncThunk(
             return await authService.register(user);
         } catch (error) {
             return thunkAPI.rejectWithValue("Unabled to register!")
+        }
+    }
+)
+
+export const login = createAsyncThunk(
+    'auth/login',
+    async (user: LoginUser, thunkAPI) => {
+        try {
+            return await authService.login(user);
+        } catch (error) {
+            return thunkAPI.rejectWithValue("Unabled to login!")
+        }
+    }
+)
+
+export const logout = createAsyncThunk(
+    'auth/logout',
+    async (_, thunkAPI) => {
+        try {
+            return await authService.logout();
+        } catch (error) {
+            return thunkAPI.rejectWithValue("Unabled to login!")
         }
     }
 )
