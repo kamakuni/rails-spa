@@ -1,12 +1,16 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { login } from '../../features/auth/authSlice'
+import { useAppDispatch, useAppSelector } from '../../store'
 
 const Login: React.FC = () => {
 
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
     const [isLoggedIn, setIsLoggedIn] = React.useState(false)
+    const dispatch = useAppDispatch()
+    const { isLoading, isSuccess } = useAppSelector((state) => state.auth)
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
@@ -20,18 +24,17 @@ const Login: React.FC = () => {
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()
-        axios.post('http://localhost:3000/api/v1/login', {
-            email: email,
-            password: password
-        }, {
-            withCredentials: true
-        }).then((res) => {
-            console.log(res)
-            setIsLoggedIn(true)
-        }).catch((e) => {
-            console.log(e.response.status)
-            setIsLoggedIn(false)
-        })
+
+        dispatch(login({ email: email, password: password }))
+
+    }
+
+    if (isLoading) {
+        return (
+            <div>
+                <p>Loading...</p>
+            </div>
+        );
     }
 
     return (
