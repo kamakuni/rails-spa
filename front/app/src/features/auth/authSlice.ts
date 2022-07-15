@@ -48,6 +48,17 @@ export const login = createAsyncThunk(
     }
 )
 
+export const isAlive = createAsyncThunk(
+    'auth/isAlive',
+    async (_, thunkAPI) => {
+        try {
+            return await authService.isAlive();
+        } catch (error) {
+            return thunkAPI.rejectWithValue("Unabled to login!")
+        }
+    }
+)
+
 export const logout = createAsyncThunk(
     'auth/logout',
     async (_, thunkAPI) => {
@@ -92,6 +103,19 @@ export const authSlice = createSlice({
                 state.isAuthenticated = true;
             })
             .addCase(login.rejected, (state) => {
+                state.isLoading = false;
+                state.isError = true;
+            })
+        builder
+            .addCase(isAlive.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(isAlive.fulfilled, (state) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.isAuthenticated = true;
+            })
+            .addCase(isAlive.rejected, (state) => {
                 state.isLoading = false;
                 state.isError = true;
             })

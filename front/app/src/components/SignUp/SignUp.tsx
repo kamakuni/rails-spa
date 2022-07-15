@@ -7,9 +7,8 @@ const SignUp: React.FC = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [isSignedUp, setIsSignedUp] = useState(false)
     const dispatch = useAppDispatch()
-    const { isLoading, isSuccess } = useAppSelector((state) => state.auth)
+    const { isLoading, isSuccess, isAuthenticated } = useAppSelector((state) => state.auth)
 
     useEffect(() => {
         if (isSuccess) {
@@ -43,7 +42,7 @@ const SignUp: React.FC = () => {
 
     return (
         <div>
-            {isSignedUp
+            {isAuthenticated
                 ? <p>Your registration is completed.</p>
                 : <form>
                     <label>
