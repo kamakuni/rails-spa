@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { login } from '../../features/auth/authSlice'
+import { login, reset } from '../../features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '../../store'
 
 const Login: React.FC = () => {
@@ -10,7 +10,7 @@ const Login: React.FC = () => {
     const [password, setPassword] = React.useState("")
     const [isLoggedIn, setIsLoggedIn] = React.useState(false)
     const dispatch = useAppDispatch()
-    const { isLoading, isSuccess } = useAppSelector((state) => state.auth)
+    const { isLoading, isSuccess, isAuthenticated } = useAppSelector((state) => state.auth)
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
@@ -29,6 +29,12 @@ const Login: React.FC = () => {
 
     }
 
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(reset())
+        }
+    }, [isSuccess])
+
     if (isLoading) {
         return (
             <div>
@@ -39,7 +45,7 @@ const Login: React.FC = () => {
 
     return (
         <div>
-            {isLoggedIn
+            {isAuthenticated
                 ? <p>You're already logged in.</p>
                 : <form>
                     <label>

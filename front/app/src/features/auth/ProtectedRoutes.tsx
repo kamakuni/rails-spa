@@ -21,13 +21,9 @@ const useAuth = (): User => {
     return { loggedIn: loggedIn }
 }
 
-//const ProtectedRoutes = () => {
-//    const auth = useAuth()
-//    return auth && auth.loggedIn ? <Outlet /> : <Navigate to="/login" replace />
-//}
-
 const ProtectedRoutes = () => {
     const [auth, setAuth] = React.useState(false);
+
     useEffect(() => {
         const fetch = async () => {
             try {
@@ -43,6 +39,7 @@ const ProtectedRoutes = () => {
         }
         fetch();
     });
+
     return auth ? <Outlet /> : <div>Users is unauthorized.</div>
 }
 
