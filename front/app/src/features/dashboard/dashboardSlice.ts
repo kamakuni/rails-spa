@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { flattenDiagnosticMessageText } from "typescript"
 import AsyncState from "../models/AsyncState"
 import List from "./models/List"
 import NewList from "./models/NewList"
