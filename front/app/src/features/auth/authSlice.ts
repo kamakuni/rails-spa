@@ -1,19 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { findAllByTestId } from "@testing-library/react";
+import AsyncState from "../models/AsyncState";
 import LoginUser from "./models/LoginUser";
 import NewUser from "./models/NewUser";
 import authService from "./services/authService";
-
-interface AsyncState {
-    isLoading: boolean,
-    isSuccess: boolean,
-    isError: boolean,
-}
-
-/*interface DisplayUser {
-    name: string,
-    email: string,
-}*/
 
 interface AuthState extends AsyncState {
     isAuthenticated: boolean,
