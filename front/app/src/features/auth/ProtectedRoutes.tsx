@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from '../../store'
 import { isAlive } from './authSlice'
 
 // https://v5.reactrouter.com/web/example/auth-workflow
-
 const ProtectedRoutes = () => {
     const { isAuthenticated } = useAppSelector((state) => state.auth)
     const dispatch = useAppDispatch();

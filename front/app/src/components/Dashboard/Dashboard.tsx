@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { reset } from '../../features/dashboard/dashboardSlice'
+import { createList, getAllLists } from '../../features/dashboard/dashboardSlice'
+import { useAppDispatch, useAppSelector } from '../../store'
 
 interface Card {
     title: string
@@ -40,45 +43,64 @@ function Card(props: CardProps) {
 function Dashboard() {
 
     const [title, setTitle] = useState("")
-    const [lists, setLists] = useState<Array<List>>([])
+    //    const [lists, setLists] = useState<Array<List>>([])
+
+    const { isLoading, isSuccess, lists } = useAppSelector((state) => state.dashboard)
+    const dispatch = useAppDispatch();
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value)
     }
 
     const handleAddListClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        const copyed = [...lists]
+        /*const copyed = [...lists]
         copyed.push({ title: title, cards: [] })
-        setLists(copyed)
+        setLists(copyed)*/
+        dispatch(createList({ title: title }))
     }
 
     const handleRemoveList = (i: number) => {
         const filtered = lists.filter((l, index) => { return i != index })
-        setLists(filtered)
+        //    setLists(filtered)
     }
 
     const handleRemoveCards = (i: number, j: number) => {
         const copyed = [...lists]
-        copyed[i].cards = copyed[i].cards.filter((c, index) => { return j != index })
-        setLists(copyed)
+        //    copyed[i].cards = copyed[i].cards.filter((c, index) => { return j != index })
+        //    setLists(copyed)
     }
 
     const handleAddCards = (i: number) => {
         const copyed = [...lists]
-        copyed[i].cards.push({ "title": "", "body": "" })
-        setLists(copyed)
+        //    copyed[i].cards.push({ "title": "", "body": "" })
+        //    setLists(copyed)
     }
 
     const handleCardTitleChange = (value: string, i: number, j: number) => {
         const copyed = [...lists]
-        copyed[i].cards[j] = { title: value, body: copyed[i].cards[j].body }
-        setLists(copyed)
+        //    copyed[i].cards[j] = { title: value, body: copyed[i].cards[j].body }
+        //    setLists(copyed)
     }
 
     const handleCardBodyChange = (value: string, i: number, j: number) => {
         const copyed = [...lists]
-        copyed[i].cards[j] = { title: copyed[i].cards[j].title, body: value }
-        setLists(copyed)
+        //    copyed[i].cards[j] = { title: copyed[i].cards[j].title, body: value }
+        //    setLists(copyed)
+    }
+
+    useEffect(() => {
+        dispatch(getAllLists())
+        if (isSuccess) {
+            dispatch(reset())
+        }
+    }, [])
+
+    if (isLoading) {
+        return (
+            <div>
+                <p>Loading...</p>
+            </div>
+        );
     }
 
     return (

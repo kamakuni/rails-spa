@@ -26,10 +26,27 @@ export const createList = createAsyncThunk(
     }
 )
 
+export const getAllLists = createAsyncThunk(
+    'dashboard/getAlllists',
+    async (_, thunkAPI) => {
+        try {
+            return await listService.getAllLists();
+        } catch (error) {
+            thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
 const dashboardSlice = createSlice({
     name: "dashboard",
     initialState,
-    reducers: {},
+    reducers: {
+        reset: (state: DashboardState) => {
+            state.isLoading = false;
+            state.isSuccess = false;
+            state.isError = false;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(createList.pending, (state) => {
@@ -37,7 +54,7 @@ const dashboardSlice = createSlice({
             })
             .addCase(createList.fulfilled, (state, action) => {
                 const copyed = [...state.lists]
-                copyed.push(action.payload)
+                copyed.push({ id: action.payload.id, title: action.payload.title, cards: [] })
                 state.lists = copyed
                 state.isLoading = false;
                 state.isSuccess = true;
@@ -46,8 +63,22 @@ const dashboardSlice = createSlice({
                 state.isLoading = false;
                 state.isError = true;
             })
-
+        builder
+            .addCase(getAllLists.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getAllLists.fulfilled, (state, action) => {
+                console.log(action)
+                state.lists = action.payload.map((list: any) => { return { id: list.id, title: list.title, cards: [] } })
+                state.isLoading = false;
+                state.isSuccess = true;
+            })
+            .addCase(getAllLists.rejected, (state) => {
+                state.isLoading = false;
+                state.isError = true;
+            })
     }
 })
 
+export const { reset } = dashboardSlice.actions
 export default dashboardSlice.reducer;

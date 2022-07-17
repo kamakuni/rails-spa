@@ -8,7 +8,6 @@ const Login: React.FC = () => {
 
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
-    const [isLoggedIn, setIsLoggedIn] = React.useState(false)
     const dispatch = useAppDispatch()
     const { isLoading, isSuccess, isAuthenticated } = useAppSelector((state) => state.auth)
 
