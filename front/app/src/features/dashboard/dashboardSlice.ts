@@ -37,6 +37,17 @@ export const getAllLists = createAsyncThunk(
     }
 )
 
+export const getCards = createAsyncThunk(
+    'dashboard/getCards',
+    async (list_id: string, thunkAPI) => {
+        try {
+            return await listService.getCards(list_id)
+        } catch (error) {
+            thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
 const dashboardSlice = createSlice({
     name: "dashboard",
     initialState,
@@ -68,12 +79,24 @@ const dashboardSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(getAllLists.fulfilled, (state, action) => {
-                console.log(action)
                 state.lists = action.payload.map((list: any) => { return { id: list.id, title: list.title, cards: [] } })
                 state.isLoading = false;
                 state.isSuccess = true;
             })
             .addCase(getAllLists.rejected, (state) => {
+                state.isLoading = false;
+                state.isError = true;
+            })
+        builder
+            .addCase(getCards.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getCards.fulfilled, (state, action) => {
+                //state.lists = action.payload.map((card: any) => { return { id: ca.id, title: list.title, cards: [] } })
+                state.isLoading = false;
+                state.isSuccess = true;
+            })
+            .addCase(getCards.rejected, (state) => {
                 state.isLoading = false;
                 state.isError = true;
             })
