@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { reset } from '../../features/dashboard/dashboardSlice'
-import { createList, getAllLists } from '../../features/dashboard/dashboardSlice'
+import { createList, getAllLists, getCards, reset } from '../../features/dashboard/dashboardSlice'
 import { useAppDispatch, useAppSelector } from '../../store'
 
 interface Card {
