@@ -29,6 +29,7 @@ const getCards = async (list_id: string): Promise<any> => {
 
 const listService = {
     create,
+    createCard,
     getAllLists,
     getCards,
 }

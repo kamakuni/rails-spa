@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import AsyncState from "../models/AsyncState"
 import List from "./models/List"
+import NewCard from "./models/NewCard"
 import NewList from "./models/NewList"
 import listService from "./services/listService"
 
@@ -42,6 +43,17 @@ export const getCards = createAsyncThunk(
     async (list_id: string, thunkAPI) => {
         try {
             return await listService.getCards(list_id)
+        } catch (error) {
+            thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
+export const createCard = createAsyncThunk(
+    'dashboard/createCard',
+    async (card: NewCard, thunkAPI) => {
+        try {
+            return await listService.createCard(card);
         } catch (error) {
             thunkAPI.rejectWithValue(error)
         }
@@ -100,6 +112,16 @@ const dashboardSlice = createSlice({
             .addCase(getCards.rejected, (state) => {
                 state.isLoading = false;
                 state.isError = true;
+            })
+        builder
+            .addCase(createCard.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(createCard.fulfilled, (state) => {
+                state.
+            })
+            .addCase(createCard.rejected, (state) => {
+
             })
     }
 })
