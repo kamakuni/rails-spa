@@ -118,10 +118,12 @@ const dashboardSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(createCard.fulfilled, (state) => {
-                state.
+                state.isLoading = false;
+                state.isSuccess = true;
             })
             .addCase(createCard.rejected, (state) => {
-
+                state.isLoading = false;
+                state.isError = true;
             })
     }
 })
