@@ -7,11 +7,6 @@ interface Card {
     body: string
 }
 
-interface List {
-    title: string
-    cards: Card[]
-}
-
 interface CardProps {
     body: string
     title: string
