@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { createList, getAllLists, getCards, reset } from '../../features/dashboard/dashboardSlice'
+import { createList, getAllLists, createCard, reset } from '../../features/dashboard/dashboardSlice'
 import { useAppDispatch, useAppSelector } from '../../store'
 
 interface Card {
@@ -66,8 +66,9 @@ function Dashboard() {
 
     const handleAddCards = (i: number) => {
         const copyed = [...lists]
-        //    copyed[i].cards.push({ "title": "", "body": "" })
-        //    setLists(copyed)
+        dispatch(createCard({ title: "", body: "", list_id: "" }))
+        copyed[i].cards.push({ title: "", body: "" })
+        //setLists(copyed)
     }
 
     const handleCardTitleChange = (value: string, i: number, j: number) => {
