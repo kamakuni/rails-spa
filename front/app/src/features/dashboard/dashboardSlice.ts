@@ -38,6 +38,17 @@ export const getAllLists = createAsyncThunk(
     }
 )
 
+export const removeList = createAsyncThunk(
+    'dashboard/removeList',
+    async (list_id: string, thunkAPI) => {
+        try {
+            return await listService.removeList(list_id)
+        } catch (error) {
+            thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
 export const getCards = createAsyncThunk(
     'dashboard/getCards',
     async (list_id: string, thunkAPI) => {
@@ -98,6 +109,18 @@ const dashboardSlice = createSlice({
             .addCase(getAllLists.rejected, (state) => {
                 state.isLoading = false;
                 state.isError = true;
+            })
+        builder
+            .addCase(removeList.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(removeList.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+            })
+            .addCase(removeList.rejected, (state) => {
+                state.isError = true
+                state.isLoading = false
             })
         builder
             .addCase(getCards.pending, (state) => {
