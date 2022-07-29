@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { createList, getAllLists, createCard, reset } from '../../features/dashboard/dashboardSlice'
+import { createList, getAllLists, removeList, createCard, reset } from '../../features/dashboard/dashboardSlice'
 import { useAppDispatch, useAppSelector } from '../../store'
 
 interface Card {
@@ -55,7 +55,7 @@ function Dashboard() {
 
     const handleRemoveList = (i: number) => {
         const filtered = lists.filter((l, index) => { return i != index })
-        //    setLists(filtered)
+        dispatch(removeList(lists[i].id))
     }
 
     const handleRemoveCards = (i: number, j: number) => {
