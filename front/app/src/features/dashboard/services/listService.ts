@@ -32,6 +32,11 @@ const getCards = async (list_id: string): Promise<any> => {
     return response.data;
 }
 
+const removeCard = async (card_id: string): Promise<any> => {
+    const response = await axios.delete(`http://localhost:3000/api/v1/cards/${card_id}`, { withCredentials: true })
+    return response;
+}
+
 const listService = {
     create,
     createCard,
