@@ -71,6 +71,17 @@ export const createCard = createAsyncThunk(
     }
 )
 
+export const removeCard = createAsyncThunk(
+    'dashboard/removeCard',
+    async (card_id: string, thunkAPI) => {
+        try {
+            return await listService.removeCard(card_id)
+        } catch (error) {
+            thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
 const dashboardSlice = createSlice({
     name: "dashboard",
     initialState,
@@ -145,6 +156,18 @@ const dashboardSlice = createSlice({
                 state.isSuccess = true;
             })
             .addCase(createCard.rejected, (state) => {
+                state.isLoading = false;
+                state.isError = true;
+            })
+        builder
+            .addCase(removeCard.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(removeCard.fulfilled, (state) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+            })
+            .addCase(removeCard.rejected, (state) => {
                 state.isLoading = false;
                 state.isError = true;
             })

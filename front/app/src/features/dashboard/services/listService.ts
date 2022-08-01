@@ -43,6 +43,7 @@ const listService = {
     getAllLists,
     removeList,
     getCards,
+    removeCard,
 }
 
 export default listService;
