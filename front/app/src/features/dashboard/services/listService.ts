@@ -1,4 +1,6 @@
+import { AssertionError } from "assert";
 import axios from "axios";
+import { isAsteriskToken } from "typescript";
 import NewCard from "../models/NewCard";
 import NewList from "../models/NewList";
 
@@ -26,6 +28,11 @@ const removeList = async (list_id: string): Promise<any> => {
     return response
 }
 
+const updateList = async (list_id: string): Promise<any> => {
+    const response = await axios.delete(`http://localhost:3000/api/v1/lists/${list_id}`, { withCredentials: true })
+    return response
+}
+
 const getCards = async (list_id: string): Promise<any> => {
     const response = await axios.get(`http://localhost:3000/api/v1/cards?list_id=${list_id}`, { withCredentials: true })
     console.log(response);
@@ -42,6 +49,7 @@ const listService = {
     createCard,
     getAllLists,
     removeList,
+    updateList,
     getCards,
     removeCard,
 }
