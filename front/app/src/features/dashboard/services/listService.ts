@@ -39,6 +39,11 @@ const getCards = async (list_id: string): Promise<any> => {
     return response.data;
 }
 
+const updateCard = async (card_id: string): Promise<any> => {
+    const response = await axios.put(`http://localhost:3000/api/v1/cards`, { withCredentials: true })
+    return response.data;
+}
+
 const removeCard = async (card_id: string): Promise<any> => {
     const response = await axios.delete(`http://localhost:3000/api/v1/cards/${card_id}`, { withCredentials: true })
     return response;
@@ -51,6 +56,7 @@ const listService = {
     removeList,
     updateList,
     getCards,
+    updateCard,
     removeCard,
 }
 
