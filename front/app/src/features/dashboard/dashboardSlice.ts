@@ -126,6 +126,8 @@ const dashboardSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(removeList.fulfilled, (state, action) => {
+                const filtered = state.lists.filter((list) => { return list.id !== action.payload.list_id })
+                state.lists = filtered
                 state.isLoading = false
                 state.isSuccess = true
             })

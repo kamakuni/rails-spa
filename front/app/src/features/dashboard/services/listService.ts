@@ -24,8 +24,8 @@ const getAllLists = async (): Promise<any> => {
 }
 
 const removeList = async (list_id: string): Promise<any> => {
-    const response = await axios.delete(`http://localhost:3000/api/v1/lists/${list_id}`, { withCredentials: true })
-    return response
+    await axios.delete(`http://localhost:3000/api/v1/lists/${list_id}`, { withCredentials: true })
+    return { "list_id": list_id }
 }
 
 const updateList = async (list_id: string): Promise<any> => {
