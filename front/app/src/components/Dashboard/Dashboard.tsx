@@ -47,9 +47,6 @@ function Dashboard() {
     }
 
     const handleAddListClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        /*const copyed = [...lists]
-        copyed.push({ title: title, cards: [] })
-        setLists(copyed)*/
         dispatch(createList({ title: title }))
     }
 
@@ -65,10 +62,7 @@ function Dashboard() {
     }
 
     const handleAddCards = (i: number) => {
-        const copyed = [...lists]
-        dispatch(createCard({ title: "", body: "", list_id: "" }))
-        copyed[i].cards.push({ title: "", body: "" })
-        //setLists(copyed)
+        dispatch(createCard({ title: "", body: "", list_id: lists[i].id }))
     }
 
     const handleCardTitleChange = (value: string, i: number, j: number) => {

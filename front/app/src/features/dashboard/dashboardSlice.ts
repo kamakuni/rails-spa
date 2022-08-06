@@ -59,7 +59,7 @@ export const getCards = createAsyncThunk(
         }
     }
 )
-
+/*
 export const createCard = createAsyncThunk(
     'dashboard/createCard',
     async (card: NewCard, thunkAPI) => {
@@ -70,7 +70,7 @@ export const createCard = createAsyncThunk(
         }
     }
 )
-
+*/
 export const removeCard = createAsyncThunk(
     'dashboard/removeCard',
     async (card_id: string, thunkAPI) => {
@@ -90,6 +90,11 @@ const dashboardSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = false;
             state.isError = false;
+        },
+        createCard: (state: any, action: any) => {
+            console.log(state)
+            console.log(action)
+            const copyed = [...state.lists]
         }
     },
     extraReducers: (builder) => {
@@ -149,18 +154,21 @@ const dashboardSlice = createSlice({
                 state.isLoading = false;
                 state.isError = true;
             })
-        builder
-            .addCase(createCard.pending, (state) => {
-                state.isLoading = true;
-            })
-            .addCase(createCard.fulfilled, (state) => {
-                state.isLoading = false;
-                state.isSuccess = true;
-            })
-            .addCase(createCard.rejected, (state) => {
-                state.isLoading = false;
-                state.isError = true;
-            })
+        /*
+    builder
+        .addCase(createCard.pending, (state) => {
+            state.isLoading = true;
+        })
+        .addCase(createCard.fulfilled, (state, action) => {
+            console.log(state.lists)
+            state.isLoading = false;
+            state.isSuccess = true;
+        })
+        .addCase(createCard.rejected, (state) => {
+            state.isLoading = false;
+            state.isError = true;
+        })
+        */
         builder
             .addCase(removeCard.pending, (state) => {
                 state.isLoading = true;
@@ -176,5 +184,5 @@ const dashboardSlice = createSlice({
     }
 })
 
-export const { reset } = dashboardSlice.actions
+export const { reset, createCard } = dashboardSlice.actions
 export default dashboardSlice.reducer;
