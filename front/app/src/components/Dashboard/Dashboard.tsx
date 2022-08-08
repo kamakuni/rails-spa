@@ -1,3 +1,4 @@
+import { stringify } from 'querystring'
 import React, { useEffect, useState } from 'react'
 import { createList, getAllLists, removeList, createCard, reset } from '../../features/dashboard/dashboardSlice'
 import { useAppDispatch, useAppSelector } from '../../store'
@@ -10,8 +11,6 @@ interface Card {
 interface CardProps {
     body: string
     title: string
-    onBodyChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-    onTitleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 function Card(props: CardProps) {
@@ -27,8 +26,6 @@ function Card(props: CardProps) {
                     <label>body:</label>
                     {props.body}
                 </div>
-                <input onChange={props.onTitleChange}></input>
-                <input onChange={props.onBodyChange}></input>
             </div>
         </div>
     )
@@ -37,6 +34,7 @@ function Card(props: CardProps) {
 function Dashboard() {
 
     const [title, setTitle] = useState("")
+    const [card, setCard] = useState({ title: "", body: "" })
     //    const [lists, setLists] = useState<Array<List>>([])
 
     const { isLoading, isSuccess, lists } = useAppSelector((state) => state.dashboard)
@@ -55,6 +53,12 @@ function Dashboard() {
         dispatch(removeList(lists[i].id))
     }
 
+    const handleSaveCards = (i: number, j: number) => {
+        const copyed = [...lists]
+        //    copyed[i].cards = copyed[i].cards.filter((c, index) => { return j != index })
+        //    setLists(copyed)
+    }
+
     const handleRemoveCards = (i: number, j: number) => {
         const copyed = [...lists]
         //    copyed[i].cards = copyed[i].cards.filter((c, index) => { return j != index })
@@ -65,16 +69,18 @@ function Dashboard() {
         dispatch(createCard({ title: "", body: "", list_id: lists[i].id }))
     }
 
-    const handleCardTitleChange = (value: string, i: number, j: number) => {
-        const copyed = [...lists]
-        //    copyed[i].cards[j] = { title: value, body: copyed[i].cards[j].body }
-        //    setLists(copyed)
+    const handleCardTitleChange = (value: string) => {
+        const copyed = { ...card }
+        copyed.title = value
+        setCard(copyed)
+        console.log(copyed)
     }
 
-    const handleCardBodyChange = (value: string, i: number, j: number) => {
-        const copyed = [...lists]
-        //    copyed[i].cards[j] = { title: copyed[i].cards[j].title, body: value }
-        //    setLists(copyed)
+    const handleCardBodyChange = (value: string) => {
+        const copyed = { ...card }
+        copyed.body = value
+        setCard(copyed)
+        console.log(copyed)
     }
 
     useEffect(() => {
@@ -108,14 +114,21 @@ function Dashboard() {
                     {lists.map((list, i) => {
                         return <li key={i}>
                             <label>{list.title}</label>
+                            <div>
+                                <label>title:</label>
+                                <input onChange={(e) => handleCardTitleChange(e.target.value)}></input>
+                            </div>
+                            <div>
+                                <label>body:</label>
+                                <input onChange={(e) => handleCardBodyChange(e.target.value)}></input>
+                            </div>
                             {list.cards.map((card, j) => {
                                 return (
                                     <div>
                                         <Card
-                                            onBodyChange={(e) => handleCardBodyChange(e.target.value, i, j)}
-                                            onTitleChange={(e) => handleCardTitleChange(e.target.value, i, j)}
                                             body={card.body}
                                             title={card.title} />
+                                        <button onClick={() => handleSaveCards(i, j)} >Save Cards</button>
                                         <button onClick={() => handleRemoveCards(i, j)} >Delete Cards</button>
                                     </div>
                                 )

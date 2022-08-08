@@ -92,8 +92,6 @@ const dashboardSlice = createSlice({
             state.isError = false;
         },
         createCard: (state: any, action: any) => {
-            console.log(state)
-            console.log(action)
             const copyed = [...state.lists]
             const index = state.lists.findIndex((list: any) => list.id === 14)
             copyed[index].cards.push(action.payload)
