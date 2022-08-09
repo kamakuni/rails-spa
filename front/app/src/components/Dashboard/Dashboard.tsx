@@ -66,7 +66,7 @@ function Dashboard() {
     }
 
     const handleAddCards = (i: number) => {
-        dispatch(createCard({ title: "", body: "", list_id: lists[i].id }))
+        dispatch(createCard({ title: card.title, body: card.body, list_id: lists[i].id }))
     }
 
     const handleCardTitleChange = (value: string) => {

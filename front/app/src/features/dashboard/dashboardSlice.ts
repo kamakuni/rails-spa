@@ -93,10 +93,10 @@ const dashboardSlice = createSlice({
         },
         createCard: (state: any, action: any) => {
             const copyed = [...state.lists]
-            const index = state.lists.findIndex((list: any) => list.id === 14)
+            const index = state.lists.findIndex((list: any) => list.id === action.payload.list_id)
             copyed[index].cards.push(action.payload)
             state.lists = copyed
-        }
+        },
     },
     extraReducers: (builder) => {
         builder
