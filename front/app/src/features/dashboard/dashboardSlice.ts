@@ -59,7 +59,7 @@ export const getCards = createAsyncThunk(
         }
     }
 )
-/*
+
 export const createCard = createAsyncThunk(
     'dashboard/createCard',
     async (card: NewCard, thunkAPI) => {
@@ -70,7 +70,7 @@ export const createCard = createAsyncThunk(
         }
     }
 )
-*/
+
 export const removeCard = createAsyncThunk(
     'dashboard/removeCard',
     async (card_id: string, thunkAPI) => {
@@ -90,12 +90,6 @@ const dashboardSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = false;
             state.isError = false;
-        },
-        createCard: (state: any, action: any) => {
-            const copyed = [...state.lists]
-            const index = state.lists.findIndex((list: any) => list.id === action.payload.list_id)
-            copyed[index].cards.push(action.payload)
-            state.lists = copyed
         },
     },
     extraReducers: (builder) => {
@@ -155,21 +149,22 @@ const dashboardSlice = createSlice({
                 state.isLoading = false;
                 state.isError = true;
             })
-        /*
-    builder
-        .addCase(createCard.pending, (state) => {
-            state.isLoading = true;
-        })
-        .addCase(createCard.fulfilled, (state, action) => {
-            console.log(state.lists)
-            state.isLoading = false;
-            state.isSuccess = true;
-        })
-        .addCase(createCard.rejected, (state) => {
-            state.isLoading = false;
-            state.isError = true;
-        })
-        */
+        builder
+            .addCase(createCard.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(createCard.fulfilled, (state, action) => {
+                const copyed = [...state.lists]
+                const index = state.lists.findIndex((list: any) => list.id === action.payload.list_id)
+                copyed[index].cards.push({ title: action.payload.title, body: action.payload.body })
+                state.lists = copyed
+                state.isLoading = false;
+                state.isSuccess = true;
+            })
+            .addCase(createCard.rejected, (state) => {
+                state.isLoading = false;
+                state.isError = true;
+            })
         builder
             .addCase(removeCard.pending, (state) => {
                 state.isLoading = true;
@@ -185,5 +180,5 @@ const dashboardSlice = createSlice({
     }
 })
 
-export const { reset, createCard } = dashboardSlice.actions
+export const { reset } = dashboardSlice.actions
 export default dashboardSlice.reducer;

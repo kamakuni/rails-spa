@@ -122,6 +122,9 @@ function Dashboard() {
                                 <label>body:</label>
                                 <input onChange={(e) => handleCardBodyChange(e.target.value)}></input>
                             </div>
+                            <div>
+                                <button onClick={() => handleAddCards(i)} >Add Cards</button>
+                            </div>
                             {list.cards.map((card, j) => {
                                 return (
                                     <div>
@@ -134,7 +137,6 @@ function Dashboard() {
                                 )
                             })}
                             <div>
-                                <button onClick={() => handleAddCards(i)} >Add Cards</button>
                                 <button onClick={() => handleRemoveList(i)}>Remove List</button>
                             </div>
                         </li>
