@@ -156,7 +156,7 @@ const dashboardSlice = createSlice({
             .addCase(createCard.fulfilled, (state, action) => {
                 const copyed = [...state.lists]
                 const index = state.lists.findIndex((list: any) => list.id === action.payload.list_id)
-                copyed[index].cards.push({ title: action.payload.title, body: action.payload.body })
+                copyed[index].cards.push({ id: action.payload.id, title: action.payload.title, body: action.payload.body })
                 state.lists = copyed
                 state.isLoading = false;
                 state.isSuccess = true;
@@ -169,7 +169,9 @@ const dashboardSlice = createSlice({
             .addCase(removeCard.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(removeCard.fulfilled, (state) => {
+            .addCase(removeCard.fulfilled, (state, action) => {
+                console.log(action);
+                const copyed = [...state.lists]
                 state.isLoading = false;
                 state.isSuccess = true;
             })

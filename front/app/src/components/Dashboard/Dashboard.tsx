@@ -1,6 +1,5 @@
-import { stringify } from 'querystring'
 import React, { useEffect, useState } from 'react'
-import { createList, getAllLists, removeList, createCard, reset } from '../../features/dashboard/dashboardSlice'
+import { createList, getAllLists, removeList, createCard, removeCard, reset } from '../../features/dashboard/dashboardSlice'
 import { useAppDispatch, useAppSelector } from '../../store'
 
 interface Card {
@@ -60,9 +59,7 @@ function Dashboard() {
     }
 
     const handleRemoveCards = (i: number, j: number) => {
-        const copyed = [...lists]
-        //    copyed[i].cards = copyed[i].cards.filter((c, index) => { return j != index })
-        //    setLists(copyed)
+        dispatch(removeCard(lists[i].cards[j].id))
     }
 
     const handleAddCards = (i: number) => {
