@@ -59,7 +59,7 @@ function Dashboard() {
     }
 
     const handleRemoveCards = (i: number, j: number) => {
-        dispatch(removeCard(lists[i].cards[j].id))
+        dispatch(removeCard({ list_id: lists[i].id, card_id: lists[i].cards[j].id }))
     }
 
     const handleAddCards = (i: number) => {

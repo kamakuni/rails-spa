@@ -73,9 +73,9 @@ export const createCard = createAsyncThunk(
 
 export const removeCard = createAsyncThunk(
     'dashboard/removeCard',
-    async (card_id: string, thunkAPI) => {
+    async (params: any, thunkAPI) => {
         try {
-            return await listService.removeCard(card_id)
+            return await listService.removeCard(params.list_id, params.card_id)
         } catch (error) {
             thunkAPI.rejectWithValue(error)
         }
@@ -171,7 +171,9 @@ const dashboardSlice = createSlice({
             })
             .addCase(removeCard.fulfilled, (state, action) => {
                 console.log(action);
-                const copyed = [...state.lists]
+                //const copyed = [...state.lists]
+                const index = state.lists.findIndex((list: any) => list.id === action.payload.list_id)
+                state.lists[index].cards = state.lists[index].cards.filter((card) => { return card.id !== action.payload.card_id })
                 state.isLoading = false;
                 state.isSuccess = true;
             })
