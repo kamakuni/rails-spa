@@ -129,7 +129,6 @@ function Dashboard() {
                                         <Card
                                             body={card.body}
                                             title={card.title} />
-                                        <button onClick={() => handleSaveCards(i, j)} >Save Cards</button>
                                         <button onClick={() => handleRemoveCards(i, j)} >Delete Cards</button>
                                     </div>
                                 )
