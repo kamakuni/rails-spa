@@ -45,6 +45,7 @@ function Dashboard() {
 
     const handleAddListClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         dispatch(createList({ title: title }))
+        setTitle("")
     }
 
     const handleRemoveList = (i: number) => {
