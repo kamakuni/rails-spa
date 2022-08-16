@@ -113,7 +113,7 @@ const dashboardSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(getAllLists.fulfilled, (state, action) => {
-                state.lists = action.payload.map((list: any) => { return { id: list.id, title: list.title, cards: [] } })
+                state.lists = action.payload.map((list: any) => { return { id: list.id, title: list.title, cards: [...list.cards] } })
                 state.isLoading = false;
                 state.isSuccess = true;
             })

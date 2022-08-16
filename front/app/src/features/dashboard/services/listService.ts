@@ -19,8 +19,9 @@ const getAllLists = async (): Promise<any> => {
     const cardsResponse = await Promise.all(listsResponse.data.map(async (list: any) => {
         return getCards(list.id)
     }))
-    console.log(cardsResponse);
-    return listsResponse.data;
+
+    const lists = listsResponse.data.map((list: any) => ({ ...list, cards: cardsResponse.flat().filter(card => card.list_id == list.id) }))
+    return lists;
 }
 
 const removeList = async (list_id: string): Promise<any> => {
