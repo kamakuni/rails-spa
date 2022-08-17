@@ -1,6 +1,5 @@
 import axios from "axios"
-import LoginUser from "../models/LoginUser"
-import NewUser from "../models/NewUser"
+import { LoginUser, NewUser } from "../models/AuthModels"
 
 const register = async (user: NewUser): Promise<any> => {
     const response = await axios.post('http://localhost:3000/api/v1/signup', user)

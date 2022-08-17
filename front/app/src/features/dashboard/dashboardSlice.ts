@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import AsyncState from "../models/AsyncState"
-import List from "./models/List"
-import NewCard from "./models/NewCard"
-import NewList from "./models/NewList"
+import { List, NewCard, NewList } from "./models/DashboardModels"
 import listService from "./services/listService"
 
 interface DashboardState extends AsyncState {

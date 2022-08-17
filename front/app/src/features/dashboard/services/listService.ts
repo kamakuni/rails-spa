@@ -1,8 +1,5 @@
-import { AssertionError } from "assert";
 import axios from "axios";
-import { isAsteriskToken } from "typescript";
-import NewCard from "../models/NewCard";
-import NewList from "../models/NewList";
+import { NewCard, NewList, ResponseList } from "../models/DashboardModels";
 
 const create = async (list: NewList): Promise<any> => {
     const response = await axios.post('http://localhost:3000/api/v1/lists', list, { withCredentials: true });
