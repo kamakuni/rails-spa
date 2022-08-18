@@ -1,17 +1,17 @@
 import axios from "axios";
-import { NewCard, NewList, ResponseList } from "../models/DashboardModels";
+import { NewCard, NewList, ResponseCard, ResponseList } from "../models/DashboardModels";
 
-const create = async (list: NewList): Promise<any> => {
+const create = async (list: NewList): Promise<ResponseList> => {
     const response = await axios.post('http://localhost:3000/api/v1/lists', list, { withCredentials: true });
     return response.data;
 }
 
-const createCard = async (card: NewCard): Promise<any> => {
+const createCard = async (card: NewCard): Promise<ResponseCard> => {
     const response = await axios.post('http://localhost:3000/api/v1/cards', card, { withCredentials: true });
     return response.data;
 }
 
-const getAllLists = async (): Promise<any> => {
+const getAllLists = async (): Promise<ResponseList[]> => {
     const listsResponse = await axios.get('http://localhost:3000/api/v1/lists', { withCredentials: true })
     const cardsResponse = await Promise.all(listsResponse.data.map(async (list: any) => {
         return getCards(list.id)

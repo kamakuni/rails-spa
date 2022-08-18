@@ -26,6 +26,16 @@ interface ResponseList {
     user_id: string,
     created_at: Date,
     updated_at: Date,
+    cards: ResponseCard[],
 }
 
-export type { Card, List, NewCard, NewList, ResponseList };
+interface ResponseCard {
+    id: string,
+    title: string,
+    body: string,
+    list_id: string,
+    created_at: Date,
+    updated_at: Date,
+}
+
+export type { Card, List, NewCard, NewList, ResponseList, ResponseCard };
