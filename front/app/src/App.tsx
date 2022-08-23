@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -9,13 +9,23 @@ import SignUp from './components/SignUp/SignUp';
 import { NavLink } from 'react-router-dom';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
 import { useAppDispatch, useAppSelector } from './store';
-import { Link } from 'react-router-dom';
-import Logout from './components/Logout/Login';
+import { logout, reset } from './features/auth/authSlice'
 
 function App() {
 
   const dispatch = useAppDispatch()
   const { isSuccess, isAuthenticated } = useAppSelector((state) => state.auth)
+
+  const handleLogout = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault()
+    dispatch(logout)
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      reset();
+    }
+  }, [])
 
   return (
     <div className="wrapper">
@@ -25,7 +35,7 @@ function App() {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/dashboard">Dashboard</NavLink>
           {
-            isAuthenticated ? <NavLink to="/logout">Logout</NavLink>
+            isAuthenticated ? <a href="" onClick={(e) => handleLogout(e)}>Logout</a>
               : <NavLink to="/login">Login</NavLink>
           }
           <NavLink to="/signup">SignUp</NavLink>
@@ -34,7 +44,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
           <Route element={<ProtectedRoutes />} >
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
