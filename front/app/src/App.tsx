@@ -16,14 +16,14 @@ function App() {
   const dispatch = useAppDispatch()
   const { isSuccess, isAuthenticated } = useAppSelector((state) => state.auth)
 
-  const handleLogout = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const handleLogout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    dispatch(logout)
+    dispatch(logout())
   }
 
   useEffect(() => {
     if (isSuccess) {
-      reset();
+      dispatch(reset());
     }
   }, [])
 
@@ -35,7 +35,7 @@ function App() {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/dashboard">Dashboard</NavLink>
           {
-            isAuthenticated ? <a href="" onClick={(e) => handleLogout(e)}>Logout</a>
+            isAuthenticated ? <button onClick={(e) => handleLogout(e)}>Logout</button>
               : <NavLink to="/login">Login</NavLink>
           }
           <NavLink to="/signup">SignUp</NavLink>
