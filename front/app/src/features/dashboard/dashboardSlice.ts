@@ -142,7 +142,6 @@ const dashboardSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(getCards.fulfilled, (state, action) => {
-                console.log(action.payload);
                 //state.lists = action.payload.map((card: any) => { return { id: ca.id, title: list.title, cards: [] } })
                 state.isLoading = false;
                 state.isSuccess = true;
@@ -175,7 +174,6 @@ const dashboardSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(removeCard.fulfilled, (state, action) => {
-                console.log(action);
                 //const copyed = [...state.lists]
                 const index = state.lists.findIndex((list: any) => list.id === action.payload.list_id)
                 state.lists[index].cards = state.lists[index].cards.filter((card) => { return card.id !== action.payload.card_id })

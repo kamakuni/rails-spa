@@ -18,18 +18,14 @@ const SignUp: React.FC = () => {
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         dispatch(register({ email: email, password: password }))
-        console.log(email);
-        console.log(password);
     }
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value)
-        console.log(e.target.value)
     }
 
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value)
-        console.log(e.target.value)
     }
 
     if (isLoading) {

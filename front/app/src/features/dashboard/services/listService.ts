@@ -33,7 +33,6 @@ const updateList = async (list_id: string): Promise<any> => {
 
 const getCards = async (list_id: string): Promise<any> => {
     const response = await axios.get(`http://localhost:3000/api/v1/cards?list_id=${list_id}`, { withCredentials: true })
-    console.log(response);
     return response.data;
 }
 
