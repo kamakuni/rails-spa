@@ -72,14 +72,12 @@ function Dashboard() {
         const copyed = { ...card }
         copyed.title = value
         setCard(copyed)
-        console.log(copyed)
     }
 
     const handleCardBodyChange = (value: string) => {
         const copyed = { ...card }
         copyed.body = value
         setCard(copyed)
-        console.log(copyed)
     }
 
     useEffect(() => {
@@ -124,16 +122,20 @@ function Dashboard() {
                             <div>
                                 <button onClick={() => handleAddCards(i)} >Add Cards</button>
                             </div>
-                            {list.cards.map((card, j) => {
-                                return (
-                                    <div>
-                                        <Card
-                                            body={card.body}
-                                            title={card.title} />
-                                        <button onClick={() => handleRemoveCards(i, j)} >Delete Cards</button>
-                                    </div>
-                                )
-                            })}
+                            <div>
+                                <ul>
+                                    {list.cards.map((card, j) => {
+                                        return (
+                                            <li key={j}>
+                                                <Card
+                                                    body={card.body}
+                                                    title={card.title} />
+                                                <button onClick={() => handleRemoveCards(i, j)} >Delete Cards</button>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
                             <div>
                                 <button onClick={() => handleRemoveList(i)}>Remove List</button>
                             </div>
