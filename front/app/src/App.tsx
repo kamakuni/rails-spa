@@ -16,7 +16,7 @@ function App() {
   const dispatch = useAppDispatch()
   const { isSuccess, isAuthenticated } = useAppSelector((state) => state.auth)
 
-  const handleLogout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleLogout = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault()
     dispatch(logout())
   }
@@ -35,7 +35,7 @@ function App() {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/dashboard">Dashboard</NavLink>
           {
-            isAuthenticated ? <button onClick={(e) => handleLogout(e)}>Logout</button>
+            isAuthenticated ? <NavLink to="/logout" onClick={(e) => handleLogout(e)}>Logout</NavLink>
               : <NavLink to="/login">Login</NavLink>
           }
           <NavLink to="/signup">SignUp</NavLink>
