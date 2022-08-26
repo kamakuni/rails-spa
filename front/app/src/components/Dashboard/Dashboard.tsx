@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { createList, getAllLists, removeList, createCard, removeCard, reset } from '../../features/dashboard/dashboardSlice'
+import { List } from '../../features/dashboard/models/DashboardModels'
 import { useAppDispatch, useAppSelector } from '../../store'
 
 interface Card {
@@ -27,6 +28,46 @@ function Card(props: CardProps) {
                 </div>
             </div>
         </div>
+    )
+}
+
+interface ListItemPros {
+    index: number,
+    list: List,
+}
+
+function ListItem(props: ListItemPros) {
+
+    const [title, setTitle] = useState("")
+    const [card, setCard] = useState({ title: "", body: "" })
+
+    return (
+        <li key={props.index}>
+            <label>{props.list.title}</label>
+            <div>
+                <label>title:</label>
+            </div>
+            <div>
+                <label>body:</label>
+            </div>
+            <div>
+            </div>
+            <div>
+                <ul>
+                    {props.list.cards.map((card, j) => {
+                        return (
+                            <li key={j}>
+                                <Card
+                                    body={card.body}
+                                    title={card.title} />
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+            <div>
+            </div>
+        </li>
     )
 }
 
