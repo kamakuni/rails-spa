@@ -18,56 +18,86 @@ function Card(props: CardProps) {
     return (
         <div>
             <div>
-                <div>
-                    <label>title:</label>
-                    {props.title}
-                </div>
-                <div>
-                    <label>body:</label>
-                    {props.body}
-                </div>
+                <label>title:</label>
+                {props.title}
+            </div>
+            <div>
+                <label>body:</label>
+                {props.body}
             </div>
         </div>
     )
 }
 
 interface ListItemPros {
-    index: number,
     list: List,
 }
 
 function ListItem(props: ListItemPros) {
 
-    const [title, setTitle] = useState("")
     const [card, setCard] = useState({ title: "", body: "" })
 
+    const dispatch = useAppDispatch();
+
+    const handleCardTitleChange = (value: string) => {
+        const copyed = { ...card }
+        copyed.title = value
+        setCard(copyed)
+    }
+
+    const handleCardBodyChange = (value: string) => {
+        const copyed = { ...card }
+        copyed.body = value
+        setCard(copyed)
+    }
+
+    const handleAddCards = () => {
+        dispatch(createCard({ title: card.title, body: card.body, list_id: props.list.id }))
+        setCard({ title: "", body: "" })
+    }
+
+    const handleRemoveCards = (index: number) => {
+        dispatch(removeCard({ list_id: props.list.id, card_id: props.list.cards[index].id }))
+    }
+
+    const handleRemoveList = () => {
+        dispatch(removeList(props.list.id))
+    }
+
     return (
-        <li key={props.index}>
+        <div>
             <label>{props.list.title}</label>
             <div>
                 <label>title:</label>
+                <input onChange={(e) => handleCardTitleChange(e.target.value)}></input>
             </div>
             <div>
                 <label>body:</label>
+                <input onChange={(e) => handleCardBodyChange(e.target.value)}></input>
             </div>
             <div>
+                <button onClick={handleAddCards} >Add Cards</button>
             </div>
             <div>
                 <ul>
-                    {props.list.cards.map((card, j) => {
+                    {props.list.cards.map((card, index) => {
                         return (
-                            <li key={j}>
-                                <Card
-                                    body={card.body}
-                                    title={card.title} />
-                            </li>
+                            <div>
+                                <li key={index}>
+                                    <Card
+                                        body={card.body}
+                                        title={card.title} />
+                                </li>
+                                <button onClick={() => handleRemoveCards(index)} >Remove Cards</button>
+                            </div>
                         )
                     })}
                 </ul>
             </div>
             <div>
+                <button onClick={handleRemoveList}>Remove List</button>
             </div>
-        </li>
+        </div>
     )
 }
 
@@ -88,6 +118,7 @@ function Dashboard() {
         dispatch(createList({ title: title }))
         setTitle("")
     }
+
 
     const handleRemoveList = (i: number) => {
         const filtered = lists.filter((l, index) => { return i != index })
@@ -147,6 +178,15 @@ function Dashboard() {
                 <button onClick={handleAddListClick}>Add Lists</button>
             </div>
             <h3>List</h3>
+            <div>
+                <ul>
+                    {lists.map((list, i) => {
+                        return <li key={i}>
+                            <ListItem list={list} ></ListItem>
+                        </li>
+                    })}
+                </ul>
+            </div>
             <div>
                 <ul>
                     {lists.map((list, i) => {
