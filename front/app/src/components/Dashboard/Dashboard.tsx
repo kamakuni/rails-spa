@@ -13,7 +13,7 @@ interface CardProps {
     title: string
 }
 
-function Card(props: CardProps) {
+const MemorizedCard = React.memo(function Card(props: CardProps) {
 
     return (
         <div>
@@ -27,7 +27,7 @@ function Card(props: CardProps) {
             </div>
         </div>
     )
-}
+})
 
 interface ListItemProps {
     list: List,
@@ -84,7 +84,7 @@ function ListItem(props: ListItemProps) {
                         return (
                             <div>
                                 <li key={index}>
-                                    <Card
+                                    <MemorizedCard
                                         body={card.body}
                                         title={card.title} />
                                 </li>
@@ -124,13 +124,13 @@ function Dashboard() {
         }
     }, [])
 
-    if (isLoading) {
-        return (
-            <div>
-                <p>Loading...</p>
-            </div>
-        );
-    }
+    /*    if (isLoading) {
+            return (
+                <div>
+                    <p>Loading...</p>
+                </div>
+            );
+        }*/
 
     return (
         <div>
