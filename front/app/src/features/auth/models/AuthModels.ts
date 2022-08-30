@@ -8,4 +8,18 @@ interface NewUser {
     password: string,
 }
 
-export type { LoginUser, NewUser };
+interface ResponseSignup {
+    name: string,
+    email: string,
+    message?: string,
+}
+
+interface ResponseLogin {
+    message: string,
+}
+
+interface ResponseLogout {
+    message: string,
+}
+
+export type { LoginUser, NewUser, ResponseSignup, ResponseLogin, ResponseLogout };

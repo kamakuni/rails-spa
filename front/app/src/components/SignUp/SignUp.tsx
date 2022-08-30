@@ -40,15 +40,21 @@ const SignUp: React.FC = () => {
             {isAuthenticated
                 ? <p>Your registration is completed.</p>
                 : <form>
-                    <label>
-                        Email:
-                        <input type="text" onChange={handleEmailChange} />
-                    </label>
-                    <label>
-                        Password:
-                        <input type="text" onChange={handlePasswordChange} />
-                    </label>
-                    <button type="submit" onClick={handleClick} >Submit</button>
+                    <div>
+                        <label>
+                            Email:
+                            <input type="text" onChange={handleEmailChange} />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Password:
+                            <input type="text" onChange={handlePasswordChange} />
+                        </label>
+                    </div>
+                    <div>
+                        <button type="submit" onClick={handleClick} >Submit</button>
+                    </div>
                 </form >
             }
         </div>
