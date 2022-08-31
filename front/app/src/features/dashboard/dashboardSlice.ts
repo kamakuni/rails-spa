@@ -128,8 +128,11 @@ const dashboardSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(removeList.fulfilled, (state, action) => {
-                const filtered = state.lists.filter((list) => { return list.id !== action.payload.list_id })
-                state.lists = filtered
+                if (action && action.payload) {
+                    const list_id = action.payload.list_id
+                    const filtered = state.lists.filter((list) => { return list.id !== list_id })
+                    state.lists = filtered
+                }
                 state.isLoading = false
                 state.isSuccess = true
             })
@@ -175,8 +178,12 @@ const dashboardSlice = createSlice({
             })
             .addCase(removeCard.fulfilled, (state, action) => {
                 //const copyed = [...state.lists]
-                const index = state.lists.findIndex((list: any) => list.id === action.payload.list_id)
-                state.lists[index].cards = state.lists[index].cards.filter((card) => { return card.id !== action.payload.card_id })
+                if (action && action.payload) {
+                    const list_id = action.payload.list_id
+                    const card_id = action.payload.card_id
+                    const index = state.lists.findIndex((list: any) => list.id === list_id)
+                    state.lists[index].cards = state.lists[index].cards.filter((card) => { return card.id !== card_id })
+                }
                 state.isLoading = false;
                 state.isSuccess = true;
             })

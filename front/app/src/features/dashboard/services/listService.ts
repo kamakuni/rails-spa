@@ -1,5 +1,5 @@
 import axios from "axios";
-import { NewCard, NewList, ResponseCard, ResponseList } from "../models/DashboardModels";
+import { NewCard, NewList, ResponseCard, ResponseList, ResponseRemoveList, ResponseRemoveCard } from "../models/DashboardModels";
 
 const create = async (list: NewList): Promise<ResponseList> => {
     const response = await axios.post('http://localhost:3000/api/v1/lists', list, { withCredentials: true });
@@ -21,7 +21,7 @@ const getAllLists = async (): Promise<ResponseList[]> => {
     return lists;
 }
 
-const removeList = async (list_id: string): Promise<any> => {
+const removeList = async (list_id: string): Promise<ResponseRemoveList> => {
     await axios.delete(`http://localhost:3000/api/v1/lists/${list_id}`, { withCredentials: true })
     return { "list_id": list_id }
 }
@@ -41,7 +41,7 @@ const updateCard = async (card_id: string): Promise<any> => {
     return response.data;
 }
 
-const removeCard = async (list_id: string, card_id: string): Promise<any> => {
+const removeCard = async (list_id: string, card_id: string): Promise<ResponseRemoveCard> => {
     await axios.delete(`http://localhost:3000/api/v1/cards/${card_id}`, { withCredentials: true })
     return { "list_id": list_id, "card_id": card_id };
 }

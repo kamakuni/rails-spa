@@ -38,4 +38,13 @@ interface ResponseCard {
     updated_at: Date,
 }
 
-export type { Card, List, NewCard, NewList, ResponseList, ResponseCard };
+interface ResponseRemoveList {
+    list_id: string
+}
+
+interface ResponseRemoveCard {
+    list_id: string,
+    card_id: string,
+}
+
+export type { Card, List, NewCard, NewList, ResponseList, ResponseCard, ResponseRemoveList, ResponseRemoveCard };
