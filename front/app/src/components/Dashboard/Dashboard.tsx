@@ -82,14 +82,12 @@ function ListItem(props: ListItemProps) {
                 <ul>
                     {props.list.cards.map((card, index) => {
                         return (
-                            <div>
-                                <li key={index}>
-                                    <MemorizedCard
-                                        body={card.body}
-                                        title={card.title} />
-                                </li>
+                            <li key={index}>
+                                <MemorizedCard
+                                    body={card.body}
+                                    title={card.title} />
                                 <button onClick={() => handleRemoveCards(index)} >Remove Cards</button>
-                            </div>
+                            </li>
                         )
                     })}
                 </ul>
