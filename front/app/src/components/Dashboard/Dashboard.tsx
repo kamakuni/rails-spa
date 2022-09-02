@@ -3,11 +3,6 @@ import { createList, getAllLists, removeList, createCard, removeCard, reset } fr
 import { List } from '../../features/dashboard/models/DashboardModels'
 import { useAppDispatch, useAppSelector } from '../../store'
 
-interface Card {
-    title: string
-    body: string
-}
-
 interface CardProps {
     body: string
     title: string
