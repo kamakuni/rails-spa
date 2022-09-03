@@ -6,40 +6,17 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
-import { NavLink } from 'react-router-dom';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
 import { useAppDispatch, useAppSelector } from './store';
-import { logout, reset } from './features/auth/authSlice'
+import Nav from './components/Nav/Nav';
 
 function App() {
-
-  const dispatch = useAppDispatch()
-  const { isSuccess, isAuthenticated } = useAppSelector((state) => state.auth)
-
-  const handleLogout = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    e.preventDefault()
-    dispatch(logout())
-  }
-
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(reset());
-    }
-  }, [])
 
   return (
     <div className="wrapper">
       <h1>App</h1>
       <BrowserRouter>
-        <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/dashboard">Dashboard</NavLink>
-          {
-            isAuthenticated ? <NavLink to="/logout" onClick={(e) => handleLogout(e)}>Logout</NavLink>
-              : <NavLink to="/login">Login</NavLink>
-          }
-          <NavLink to="/signup">SignUp</NavLink>
-        </nav>
+        <Nav></Nav>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
