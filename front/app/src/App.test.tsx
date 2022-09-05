@@ -13,3 +13,33 @@ test('renders home link', () => {
   const anchorElement = screen.getAllByText("Home")[0]
   expect(anchorElement).toHaveAttribute("href", "/")
 });
+
+test('renders dashboard link', () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  const anchorElement = screen.getAllByText("Dashboard")[0]
+  expect(anchorElement).toHaveAttribute("href", "/dashboard")
+});
+
+test('renders login link', () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  const anchorElement = screen.getAllByText("Login")[0]
+  expect(anchorElement).toHaveAttribute("href", "/login")
+});
+
+test('renders signup link', () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  const anchorElement = screen.getAllByText("Signup")[0]
+  expect(anchorElement).toHaveAttribute("href", "/signup")
+});
