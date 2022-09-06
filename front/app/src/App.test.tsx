@@ -10,7 +10,7 @@ test('renders home link', () => {
       <App />
     </Provider>
   );
-  const anchorElement = screen.getAllByText("Home")[0]
+  const anchorElement = screen.getAllByText("Home").filter((el) => { return el.nodeName === "A" })[0]
   expect(anchorElement).toHaveAttribute("href", "/")
 });
 
@@ -20,7 +20,7 @@ test('renders dashboard link', () => {
       <App />
     </Provider>
   );
-  const anchorElement = screen.getAllByText("Dashboard")[0]
+  const anchorElement = screen.getAllByText("Dashboard").filter((el) => { return el.nodeName === "A" })[0]
   expect(anchorElement).toHaveAttribute("href", "/dashboard")
 });
 
@@ -30,7 +30,7 @@ test('renders login link', () => {
       <App />
     </Provider>
   );
-  const anchorElement = screen.getAllByText("Login")[0]
+  const anchorElement = screen.getAllByText("Login").filter((el) => { return el.nodeName === "A" })[0]
   expect(anchorElement).toHaveAttribute("href", "/login")
 });
 
@@ -40,6 +40,6 @@ test('renders signup link', () => {
       <App />
     </Provider>
   );
-  const anchorElement = screen.getAllByText("Signup")[0]
+  const anchorElement = screen.getAllByText("Signup").filter((el) => { return el.nodeName === "A" })[0]
   expect(anchorElement).toHaveAttribute("href", "/signup")
 });
