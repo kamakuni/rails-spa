@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { act } from 'react-dom/test-utils';
 
 test('renders home link', () => {
   render(
@@ -42,4 +43,18 @@ test('renders signup link', () => {
   );
   const anchorElement = screen.getAllByText("Signup").filter((el) => { return el.nodeName === "A" })[0]
   expect(anchorElement).toHaveAttribute("href", "/signup")
+});
+
+test('renders home contents', () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  const anchorElement = screen.getAllByText("Home").filter((el) => { return el.nodeName === "A" })[0]
+  act(() => {
+    anchorElement.click();
+  })
+  const h2Element = screen.getAllByText("Home").filter((el) => { return el.nodeName === "H2" })[0]
+  expect(h2Element).toHaveTextContent("Home")
 });
