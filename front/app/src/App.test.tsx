@@ -58,3 +58,17 @@ test('renders home contents', () => {
   const h2Element = screen.getAllByText("Home").filter((el) => { return el.nodeName === "H2" })[0]
   expect(h2Element).toHaveTextContent("Home")
 });
+
+test('renders dashboard contents without authorization', () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  const anchorElement = screen.getAllByText("Dashboard").filter((el) => { return el.nodeName === "A" })[0]
+  act(() => {
+    anchorElement.click();
+  })
+  const divElement = screen.getAllByText("Users is unauthorized.");
+  expect(divElement).toHaveLength(1);
+});
