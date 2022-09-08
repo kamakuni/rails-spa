@@ -59,7 +59,7 @@ test('renders home contents', () => {
   expect(h2Element).toHaveTextContent("Home")
 });
 
-test('renders dashboard contents without authorization', () => {
+test('renders unauthorized message after clicking /dashboard', () => {
   render(
     <Provider store={store}>
       <App />
@@ -72,3 +72,17 @@ test('renders dashboard contents without authorization', () => {
   const divElement = screen.getAllByText("Users is unauthorized.");
   expect(divElement).toHaveLength(1);
 });
+
+test('renders login form after clicking /login', async () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  const anchorElement = screen.getAllByText("Login").filter((el) => { return el.nodeName === "A" })[0]
+  act(() => {
+    anchorElement.click();
+  })
+  const labelElement = await screen.findByText("Email:")
+  expect(labelElement).not.toBe(null)
+})
