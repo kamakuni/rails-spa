@@ -86,3 +86,17 @@ test('renders login form after clicking /login', async () => {
   const labelElement = await screen.findByText("Email:")
   expect(labelElement).not.toBe(null)
 })
+
+test('renders signup form after clicking /signup', async () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  const anchorElement = screen.getAllByText("Signup").filter((el) => { return el.nodeName === "A" })[0]
+  act(() => {
+    anchorElement.click();
+  })
+  const labelElement = await screen.findByText("Email:")
+  expect(labelElement).not.toBe(null)
+})
