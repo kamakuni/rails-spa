@@ -12,8 +12,18 @@ test('inputs email address', () => {
       <Login />
     </Provider>
   );
-  const input: HTMLInputElement = screen.getByRole("email")
+  const input: HTMLInputElement = screen.getAllByRole("textbox")[0]
   userEvent.type(input, "test")
   expect(input.value).toBe("test")
 });
 
+test('inputs password address', () => {
+  render(
+    <Provider store={store}>
+      <Login />
+    </Provider>
+  );
+  const input: HTMLInputElement = screen.getAllByRole("textbox")[1]
+  userEvent.type(input, "test")
+  expect(input.value).toBe("test")
+});
