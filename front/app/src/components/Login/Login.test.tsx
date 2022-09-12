@@ -12,7 +12,7 @@ test('inputs email address', () => {
       <Login />
     </Provider>
   );
-  const input: HTMLInputElement = screen.getAllByRole("textbox")[0]
+  const input = screen.getAllByRole("textbox")[0] as HTMLInputElement
   userEvent.type(input, "test")
   expect(input.value).toBe("test")
 });
@@ -23,7 +23,7 @@ test('inputs password address', () => {
       <Login />
     </Provider>
   );
-  const input: HTMLInputElement = screen.getAllByRole("textbox")[1]
+  const input = screen.getAllByRole("textbox")[1] as HTMLInputElement
   userEvent.type(input, "test")
   expect(input.value).toBe("test")
 });
