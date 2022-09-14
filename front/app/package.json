@@ -44,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "msw": "^0.47.2",
+    "whatwg-fetch": "^3.6.2"
   }
 }
