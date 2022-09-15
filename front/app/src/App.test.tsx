@@ -10,7 +10,7 @@ import { rest } from "msw";
 describe("test for app", () => {
 
   const handlers = [
-    rest.get("/api/v1/login", (_, res, ctx) => {
+    rest.get("http://localhost:3000/api/v1/login", (req, res, ctx) => {
       return res(
         ctx.json({
           message: ""
@@ -20,6 +20,10 @@ describe("test for app", () => {
   ]
 
   const server = setupServer(...handlers)
+
+  beforeAll(() => server.listen())
+  afterEach(() => server.resetHandlers())
+  afterAll(() => server.close())
 
   test('renders home link', () => {
     render(
