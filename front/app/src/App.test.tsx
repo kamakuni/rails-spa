@@ -16,6 +16,18 @@ describe("test for app", () => {
           message: ""
         })
       )
+    }),
+    rest.post("http://localhost:3000/api/v1/login", (req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.cookie("_session_id", "valid_session_id", {
+          httpOnly: true,
+          path: '/'
+        }),
+        ctx.json({
+          message: ""
+        })
+      )
     })
   ]
 
