@@ -11,23 +11,47 @@ describe("test for app", () => {
 
   const handlers = [
     rest.get("http://localhost:3000/api/v1/login", (req, res, ctx) => {
-      return res(
-        ctx.json({
-          message: ""
-        })
-      )
+      const { session_id } = req.cookies;
+      const isValid = (session_id: string) => session_id === "valid"
+      if (isValid(session_id)) {
+        return res(
+          ctx.status(200),
+          ctx.json({
+            message: "Users is authorized."
+          })
+        )
+      } else {
+        return res(
+          ctx.status(401),
+          ctx.json({
+            message: "Users is unauthorized."
+          })
+        )
+      }
     }),
-    rest.post("http://localhost:3000/api/v1/login", (req, res, ctx) => {
-      return res(
-        ctx.status(200),
-        ctx.cookie("_session_id", "valid_session_id", {
-          httpOnly: true,
-          path: '/'
-        }),
-        ctx.json({
-          message: ""
-        })
-      )
+    rest.post("http://localhost:3000/api/v1/login", async (req, res, ctx) => {
+      const isValid = (email: string, password: string) => email === "valid" && password === "valid"
+      const data = await req.json()
+      if (isValid(data.email, data.password)) {
+        return res(
+          ctx.status(200),
+          ctx.cookie("_session_id", "valid", {
+            httpOnly: true,
+            path: '/'
+          }),
+          ctx.json({
+            message: "Users is authorized."
+          })
+        )
+      } else {
+        return res(
+          ctx.status(400),
+          ctx.json({
+            message: "Users is unauthorized."
+          })
+        )
+      }
+
     })
   ]
 
