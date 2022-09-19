@@ -74,9 +74,10 @@ describe("test for login", () => {
     const password = screen.getAllByRole("textbox")[1] as HTMLInputElement
     userEvent.type(password, "valid")
     const button = await screen.findByRole("button")
-    //act(() => {
-    //  userEvent.click(button)
-    //})
+    userEvent.click(button)
+    await act(async () => {
+      userEvent.click(button)
+    })
 
   })
 

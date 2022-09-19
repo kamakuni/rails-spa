@@ -115,18 +115,18 @@ describe("test for app", () => {
     expect(h2Element).toHaveTextContent("Home")
   });
 
-  test('renders unauthorized message after clicking /dashboard', () => {
+  test('renders unauthorized message after clicking /dashboard', async () => {
     render(
       <Provider store={store}>
         <App />
       </Provider>
     );
     const anchorElement = screen.getAllByText("Dashboard").filter((el) => { return el.nodeName === "A" })[0]
-    //act(() => {
-    //  anchorElement.click();
-    //})
-    //const divElement = await screen.findByText("Users is unauthorized.");
-    //expect(divElement).not.toBe(null)
+    await act(async () => {
+      anchorElement.click();
+    })
+    const divElement = await screen.findByText("Users is unauthorized.");
+    expect(divElement).not.toBe(null)
   });
 
   test('renders login form after clicking /login', async () => {
@@ -136,7 +136,7 @@ describe("test for app", () => {
       </Provider>
     );
     const anchorElement = screen.getAllByText("Login").filter((el) => { return el.nodeName === "A" })[0]
-    act(() => {
+    await act(async () => {
       anchorElement.click();
     })
     const labelElement = await screen.findByText("Email:")
@@ -150,7 +150,7 @@ describe("test for app", () => {
       </Provider>
     );
     const anchorElement = screen.getAllByText("Signup").filter((el) => { return el.nodeName === "A" })[0]
-    act(() => {
+    await act(async () => {
       anchorElement.click();
     })
     const labelElement = await screen.findByText("Email:")
