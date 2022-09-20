@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { store } from '../../store';
 import { setupServer } from 'msw/lib/node';
 import { rest } from 'msw';
+import { execPath } from 'process';
 
 describe("test for login", () => {
   const handlers = [
@@ -78,7 +79,8 @@ describe("test for login", () => {
     await act(async () => {
       userEvent.click(button)
     })
-
+    const p = await screen.findByText("You're already logged in.")
+    expect(p).not.toBe(null)
   })
 
 })
