@@ -7,7 +7,6 @@ import userEvent from '@testing-library/user-event';
 import { store } from '../../store';
 import { setupServer } from 'msw/lib/node';
 import { rest } from 'msw';
-import { execPath } from 'process';
 
 describe("test for login", () => {
   const handlers = [
@@ -75,7 +74,6 @@ describe("test for login", () => {
     const password = screen.getAllByRole("textbox")[1] as HTMLInputElement
     userEvent.type(password, "valid")
     const button = await screen.findByRole("button")
-    userEvent.click(button)
     await act(async () => {
       userEvent.click(button)
     })
