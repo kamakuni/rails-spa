@@ -37,7 +37,7 @@ const SignUp: React.FC = () => {
 
     return (
         <div>
-            {isAuthenticated
+            {isSuccess
                 ? <p>Your registration is completed.</p>
                 : <form>
                     <div>

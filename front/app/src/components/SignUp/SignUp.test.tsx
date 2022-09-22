@@ -17,10 +17,6 @@ describe("test for Signup", () => {
       if (isValid(data.email, data.password)) {
         return res(
           ctx.status(200),
-          ctx.cookie("_session_id", "valid", {
-            httpOnly: true,
-            path: '/'
-          }),
           ctx.json({
             message: "Users is authorized."
           })
@@ -64,5 +60,23 @@ describe("test for Signup", () => {
     userEvent.type(input, "test")
     expect(input.value).toBe("test")
   });
+
+  test('submits email and password', async () => {
+    render(
+      <Provider store={store}>
+        <SignUp />
+      </Provider>
+    )
+    const email = screen.getAllByRole("textbox")[0] as HTMLInputElement
+    userEvent.type(email, "valid")
+    const password = screen.getAllByRole("textbox")[1] as HTMLInputElement
+    userEvent.type(password, "valid")
+    const button = await screen.findByRole("button")
+    await act(async () => {
+      userEvent.click(button)
+    })
+    const p = await screen.findByText("Your registration is completed.")
+    expect(p).not.toBe(null)
+  })
 
 })
