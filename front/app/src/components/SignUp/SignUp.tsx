@@ -6,11 +6,13 @@ const SignUp: React.FC = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const dispatch = useAppDispatch()
     const { isLoading, isSuccess, isAuthenticated } = useAppSelector((state) => state.auth)
 
     useEffect(() => {
         if (isSuccess) {
+            setIsSubmitted(true)
             dispatch(reset())
         }
     }, [isSuccess])
@@ -35,28 +37,33 @@ const SignUp: React.FC = () => {
             </div>);
     }
 
+    if (isSubmitted) {
+        return (
+            <div>
+                <p>Your registration is completed.</p>
+            </div>
+        );
+    }
+
     return (
         <div>
-            {isSuccess
-                ? <p>Your registration is completed.</p>
-                : <form>
-                    <div>
-                        <label>
-                            Email:
-                            <input type="text" onChange={handleEmailChange} />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Password:
-                            <input type="text" onChange={handlePasswordChange} />
-                        </label>
-                    </div>
-                    <div>
-                        <button type="submit" onClick={handleClick} >Submit</button>
-                    </div>
-                </form >
-            }
+            <form>
+                <div>
+                    <label>
+                        Email:
+                        <input type="text" onChange={handleEmailChange} />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Password:
+                        <input type="text" onChange={handlePasswordChange} />
+                    </label>
+                </div>
+                <div>
+                    <button type="submit" onClick={handleClick} >Submit</button>
+                </div>
+            </form >
         </div>
     );
 }
