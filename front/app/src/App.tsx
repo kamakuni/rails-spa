@@ -9,14 +9,14 @@ import SignUp from './components/SignUp/SignUp';
 import ProtectedRoutes from './features/auth/ProtectedRoutes';
 import { useAppDispatch, useAppSelector } from './store';
 import Nav from './components/Nav/Nav';
+import Header from './components/Header/Header';
 
 function App() {
 
   return (
     <div className="wrapper">
-      <h1>App</h1>
       <BrowserRouter>
-        <Nav></Nav>
+        <Header></Header>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
