@@ -5,7 +5,9 @@ import styles from "../../styles/components/Header.module.scss"
 const Header = () => {
     return (
         <header className={styles.header}>
-            <Nav></Nav>
+            <div className={styles.content}>
+                <Nav></Nav>
+            </div>
         </header>
     )
 }

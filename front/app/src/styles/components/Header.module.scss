@@ -1,5 +1,14 @@
+@import "../variables.scss";
+
 .header {
     position: sticky;
     top: 0;
-    background-color: rgb(255, 255, 255);
+    background-color: $base-color;
+}
+
+.content {
+    margin: 0 auto;
+    max-width: 980px;
+    padding: 0 22px;
+    position: relative;
 }
