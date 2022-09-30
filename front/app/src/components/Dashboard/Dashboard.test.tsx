@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import { rest } from "msw"
 import { setupServer } from "msw/lib/node"
 import { Provider } from "react-redux"
@@ -67,11 +67,13 @@ describe("test for dashboard", () => {
   beforeAll(() => server.listen())
   afterEach(() => server.resetHandlers())
   afterAll(() => server.close())
-  test("renders list items", () => {
+  test("renders list items", async () => {
     render(
       <Provider store={store}>
         <Dashboard />
       </Provider>
     );
+    const l1 = await screen.findByText("l1");
+    expect(l1).toHaveLength(1)
   })
 })
