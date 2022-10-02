@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../store'
 import { register, reset } from '../../features/auth/authSlice'
+import Message from '../Message/Message'
 
 const SignUp: React.FC = () => {
 
@@ -40,7 +41,7 @@ const SignUp: React.FC = () => {
     if (isSubmitted) {
         return (
             <div>
-                <p>Your registration is completed.</p>
+                <Message body="Your registration is completed." level="info"></Message>
             </div>
         );
     }

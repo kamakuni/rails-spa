@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { login, reset } from '../../features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '../../store'
+import Message from '../Message/Message'
 
 const Login: React.FC = () => {
 
@@ -43,7 +44,7 @@ const Login: React.FC = () => {
     return (
         <div>
             {isAuthenticated
-                ? <p>You're already logged in.</p>
+                ? <Message body="You're already logged in." level="info"></Message>
                 : <form>
                     <div>
                         <label>

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Outlet } from 'react-router'
+import Message from '../../components/Message/Message'
 import { useAppDispatch, useAppSelector } from '../../store'
 import { isAlive } from './authSlice'
 
@@ -14,7 +15,7 @@ const ProtectedRoutes = () => {
         }
     }, []);
 
-    return isAuthenticated ? <Outlet /> : <div>Users is unauthorized.</div>
+    return isAuthenticated ? <Outlet /> : <Message body="Users is unauthorized." level="info"></Message>
 }
 
 export default ProtectedRoutes;
