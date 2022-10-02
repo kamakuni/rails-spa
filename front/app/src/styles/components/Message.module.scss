@@ -1,15 +1,27 @@
-.error {
-    background: red;
+.danger {
+    background: f14668;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: .5rem 2rem;
 }
 
 .success {
-    background: blue;
+    background: #48c78e;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: .5rem 2rem;
 }
 
 .info {
-    background: yellow;
+    background: #3e8ed0;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: .5rem 2rem;
 }
 
 .warn {
-    background: orange;
+    background: #ffe08a;
+    color: rgba(0, 0, 0, .7);
+    border-radius: 5px;
+    padding: .5rem 2rem;
 }
