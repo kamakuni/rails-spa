@@ -1,7 +1,6 @@
 import Nav from "../Nav/Nav"
 import styles from "../../styles/components/Header.module.scss"
 
-
 const Header = () => {
     return (
         <header className={styles.header}>

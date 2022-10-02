@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { logout, reset } from '../../features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '../../store';
+import styles from '../../styles/components/Nav.module.scss';
 
 function Nav() {
 
@@ -22,13 +23,13 @@ function Nav() {
 
     return (
         <nav>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to="/" className={styles.nav}>Home</NavLink>
+            <NavLink to="/dashboard" className={styles.nav}>Dashboard</NavLink>
             {
-                isAuthenticated ? <NavLink to="/logout" onClick={(e) => handleLogout(e)}>Logout</NavLink>
-                    : <NavLink to="/login">Login</NavLink>
+                isAuthenticated ? <NavLink to="/logout" onClick={(e) => handleLogout(e)} className={styles.nav}>Logout</NavLink>
+                    : <NavLink to="/login" className={styles.nav}>Login</NavLink>
             }
-            <NavLink to="/signup">Signup</NavLink>
+            <NavLink to="/signup" className={styles.nav}>Signup</NavLink>
         </nav>
     )
 }
