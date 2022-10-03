@@ -11,3 +11,12 @@ a {
   color: inherit;
   text-decoration: inherit;
 }
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

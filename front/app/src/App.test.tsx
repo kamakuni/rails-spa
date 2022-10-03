@@ -139,7 +139,7 @@ describe("test for app", () => {
     await act(async () => {
       anchorElement.click();
     })
-    const labelElement = await screen.findByText("Email:")
+    const labelElement = await screen.findByText("Email")
     expect(labelElement).not.toBe(null)
   })
 
@@ -153,7 +153,7 @@ describe("test for app", () => {
     await act(async () => {
       anchorElement.click();
     })
-    const labelElement = await screen.findByText("Email:")
+    const labelElement = await screen.findByText("Email")
     expect(labelElement).not.toBe(null)
   })
 

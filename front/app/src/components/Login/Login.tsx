@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { login, reset } from '../../features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '../../store'
 import Message from '../Message/Message'
+import styles from '../../styles/components/Button.module.scss'
 
 const Login: React.FC = () => {
 
@@ -47,19 +47,19 @@ const Login: React.FC = () => {
                 ? <Message body="You're already logged in." level="info"></Message>
                 : <form>
                     <div>
-                        <label>
-                            Email:
+                        <div>
+                            <label>Email</label>
+                        </div>
+                        <div>
                             <input type="text" onChange={handleEmailChange} />
-                        </label>
+                        </div>
                     </div>
                     <div>
-                        <label>
-                            Password:
-                            <input type="text" onChange={handlePasswordChange} />
-                        </label>
+                        <label>Password</label>
+                        <input type="text" onChange={handlePasswordChange} />
                     </div>
                     <div>
-                        <button type="submit" onClick={handleClick} >Submit</button>
+                        <button className={styles.button} type="submit" onClick={handleClick} >Submit</button>
                     </div>
                 </form>
             }
