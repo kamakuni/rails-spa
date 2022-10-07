@@ -7,14 +7,15 @@ const register = async (user: NewUser): Promise<ResponseSignup> => {
 }
 
 const login = async (user: LoginUser): Promise<ResponseLogin> => {
-    const response = await axios.post('http://localhost:3000/api/v1/login', user, {
+    console.log(process.env)
+    const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/v1/login`, user, {
         withCredentials: true
     })
     return response.data
 }
 
 const isAlive = async (): Promise<ResponseLogin> => {
-    const response = await axios.get('http://localhost:3000/api/v1/login', {
+    const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/v1/login`, {
         withCredentials: true
     })
     return response.data
