@@ -2,7 +2,7 @@ import axios from "axios"
 import { LoginUser, NewUser, ResponseLogin, ResponseLogout, ResponseSignup } from "../models/AuthModels"
 
 const register = async (user: NewUser): Promise<ResponseSignup> => {
-    const response = await axios.post('http://localhost:3000/api/v1/signup', user)
+    const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/v1/signup`, user)
     return response.data
 }
 
@@ -22,7 +22,7 @@ const isAlive = async (): Promise<ResponseLogin> => {
 }
 
 const logout = async (): Promise<ResponseLogout> => {
-    const response = await axios.delete('http://localhost:3000/api/v1/logout', {
+    const response = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/v1/logout`, {
         withCredentials: true
     })
     return response.data
