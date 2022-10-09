@@ -52,11 +52,17 @@ const SignUp: React.FC = () => {
             <form>
                 <div>
                     <label>Email</label>
+                </div>
+                <div>
                     <input type="text" onChange={handleEmailChange} />
                 </div>
                 <div>
-                    <label>Password</label>
-                    <input type="text" onChange={handlePasswordChange} />
+                    <div>
+                        <label>Password</label>
+                    </div>
+                    <div>
+                        <input type="text" onChange={handlePasswordChange} />
+                    </div>
                 </div>
                 <div>
                     <button className={styles.button} type="submit" onClick={handleClick} >Submit</button>

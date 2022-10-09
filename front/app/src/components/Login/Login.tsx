@@ -55,8 +55,12 @@ const Login: React.FC = () => {
                         </div>
                     </div>
                     <div>
-                        <label>Password</label>
-                        <input type="text" onChange={handlePasswordChange} />
+                        <div>
+                            <label>Password</label>
+                        </div>
+                        <div>
+                            <input type="text" onChange={handlePasswordChange} />
+                        </div>
                     </div>
                     <div>
                         <button className={styles.button} type="submit" onClick={handleClick} >Submit</button>
