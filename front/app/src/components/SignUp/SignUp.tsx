@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../store'
 import { register, reset } from '../../features/auth/authSlice'
 import Message from '../Message/Message'
-import styles from '../../styles/components/Button.module.scss'
+import styles from '../../styles/components/Login.module.scss'
 
 const SignUp: React.FC = () => {
 
@@ -51,14 +51,16 @@ const SignUp: React.FC = () => {
         <div>
             <form>
                 <div>
-                    <label>Email</label>
-                </div>
-                <div>
-                    <input type="text" onChange={handleEmailChange} />
+                    <div>
+                        <label className={styles.label} >Email</label>
+                    </div>
+                    <div>
+                        <input type="text" onChange={handleEmailChange} />
+                    </div>
                 </div>
                 <div>
                     <div>
-                        <label>Password</label>
+                        <label className={styles.label}>Password</label>
                     </div>
                     <div>
                         <input type="text" onChange={handlePasswordChange} />
