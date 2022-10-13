@@ -20,11 +20,3 @@ button {
   -moz-appearance: none;
   appearance: none;
 }
-
-input[type="text"] {
-  padding: 0;
-  border: none;
-  border-radius: 0;
-  outline: none;
-  background: none;
-}
