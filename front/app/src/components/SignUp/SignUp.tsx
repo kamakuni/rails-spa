@@ -55,7 +55,7 @@ const SignUp: React.FC = () => {
                         <label className={styles.label} >Email</label>
                     </div>
                     <div>
-                        <input type="text" onChange={handleEmailChange} />
+                        <input type="text" placeholder="email" onChange={handleEmailChange} />
                     </div>
                 </div>
                 <div>
@@ -63,7 +63,7 @@ const SignUp: React.FC = () => {
                         <label className={styles.label}>Password</label>
                     </div>
                     <div>
-                        <input type="text" onChange={handlePasswordChange} />
+                        <input type="text" placeholder="password" onChange={handlePasswordChange} />
                     </div>
                 </div>
                 <div>
