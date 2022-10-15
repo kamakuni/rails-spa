@@ -46,7 +46,7 @@ const Login: React.FC = () => {
             {isAuthenticated
                 ? <Message body="You're already logged in." level="info"></Message>
                 : <form>
-                    <div>
+                    <div className={styles.control}>
                         <div>
                             <label className={styles.label} >Email</label>
                         </div>
@@ -54,7 +54,7 @@ const Login: React.FC = () => {
                             <input className={styles.input} type="text" placeholder="email" onChange={handleEmailChange} />
                         </div>
                     </div>
-                    <div>
+                    <div className={styles.control}>
                         <div>
                             <label className={styles.label} >Password</label>
                         </div>
@@ -62,7 +62,7 @@ const Login: React.FC = () => {
                             <input className={styles.input} type="text" placeholder="password" onChange={handlePasswordChange} />
                         </div>
                     </div>
-                    <div>
+                    <div className={styles.control}>
                         <button className={styles.button} type="submit" onClick={handleClick} >Submit</button>
                     </div>
                 </form>

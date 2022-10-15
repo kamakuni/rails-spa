@@ -1,3 +1,7 @@
+.control {
+    margin-bottom: 0.5rem;
+}
+
 .button {
     background: rgb(62, 142, 208);
     color: rgb(255, 255, 255);
@@ -39,6 +43,7 @@
 }
 
 .input:focus {
-    border-color: rgb(67, 147, 215);
-    outline: none;
+    //border-color: rgb(67, 147, 215);
+    outline: solid 2px rgb(67, 147, 215);
+    outline-offset: 1px;
 }
