@@ -2,21 +2,22 @@
     background: rgb(62, 142, 208);
     color: rgb(255, 255, 255);
     border-radius: .3em;
-    padding: .5rem 1rem;
+    font-size: 1em;
+    padding: .5em 1em;
 }
 
 .button:hover {
     background: rgb(67, 147, 215);
     color: rgb(255, 255, 255);
     cursor: pointer;
-    border-radius: .3rem;
-    padding: .5rem 1rem;
+    border-radius: .3em;
+    padding: .5em 1em;
 }
 
 .label {
-    margin-bottom: .5rem;
+    margin-bottom: .5em;
     display: block;
-    font-size: 1rem;
+    font-size: 1em;
     font-weight: 700;
 }
 
@@ -24,14 +25,20 @@
     box-sizing: border-box;
     box-shadow: inset 0 0.0625em 0.125em rgb(10 10 10 / 5%);
     background-color: #fff;
+    border: 1px;
     border-color: #dbdbdb;
     border-radius: 0.375em;
+    border-style: solid;
     color: #363636;
-    border: 1px solid transparent;
-    font-size: 1rem;
+    font-size: 1em;
     padding-bottom: calc(0.5em - 1px);
     padding-left: calc(0.75em - 1px);
     padding-right: calc(0.75em - 1px);
     padding-top: calc(0.5em - 1px);
     height: 2.5em;
+}
+
+.input:focus {
+    border-color: rgb(67, 147, 215);
+    outline: none;
 }
