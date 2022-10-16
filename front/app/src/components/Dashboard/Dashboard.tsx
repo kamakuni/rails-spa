@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { createList, getAllLists, removeList, createCard, removeCard, reset } from '../../features/dashboard/dashboardSlice'
 import { List } from '../../features/dashboard/models/DashboardModels'
 import { useAppDispatch, useAppSelector } from '../../store'
+import styles from '../../styles/components/Dashoboard.module.scss'
 
 interface CardProps {
     body: string
@@ -12,8 +13,8 @@ const MemorizedCard = React.memo(function Card(props: CardProps) {
 
     return (
         <div>
-            <div>
-                <label>title:</label>
+            <div className={styles.control}>
+                <label className={styles.label}>title:</label>
                 {props.title}
             </div>
             <div>
@@ -61,7 +62,9 @@ function ListItem(props: ListItemProps) {
 
     return (
         <div>
-            <label>{props.list.title}</label>
+            <div className={styles.control}>
+                <label className={styles.label}>{props.list.title}</label>
+            </div>
             <div>
                 <label>title:</label>
                 <input onChange={(e) => handleCardTitleChange(e.target.value)}></input>
@@ -129,11 +132,13 @@ function Dashboard() {
         <div>
             <h2>Dashboard</h2>
             <div>
-                <div>
-                    <label>title</label>
-                    <input onChange={handleTitleChange}></input>
+                <div className={styles.control}>
+                    <label className={styles.label}>title</label>
+                    <input className={styles.input} onChange={handleTitleChange}></input>
                 </div>
-                <button onClick={handleAddListClick}>Add Lists</button>
+                <div className={styles.control}>
+                    <button className={styles.button} onClick={handleAddListClick}>Add Lists</button>
+                </div>
             </div>
             <h3>List</h3>
             <div>
