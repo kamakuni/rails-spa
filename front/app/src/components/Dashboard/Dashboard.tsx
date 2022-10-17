@@ -65,16 +65,20 @@ function ListItem(props: ListItemProps) {
             <div className={styles.control}>
                 <label className={styles.label}>{props.list.title}</label>
             </div>
-            <div>
-                <label>title:</label>
-                <input onChange={(e) => handleCardTitleChange(e.target.value)}></input>
+            <div className={styles.control}>
+                <label className={styles.label}>title</label>
             </div>
-            <div>
-                <label>body:</label>
-                <input onChange={(e) => handleCardBodyChange(e.target.value)}></input>
+            <div className={styles.control}>
+                <input className={styles.input} onChange={(e) => handleCardTitleChange(e.target.value)}></input>
             </div>
-            <div>
-                <button onClick={handleAddCards} >Add Cards</button>
+            <div className={styles.control}>
+                <label className={styles.label}>body</label>
+            </div>
+            <div className={styles.control}>
+                <input className={styles.input} onChange={(e) => handleCardBodyChange(e.target.value)}></input>
+            </div>
+            <div className={styles.control}>
+                <button className={styles.button} onClick={handleAddCards} >Add Cards</button>
             </div>
             <div>
                 <ul>
@@ -84,14 +88,16 @@ function ListItem(props: ListItemProps) {
                                 <MemorizedCard
                                     body={card.body}
                                     title={card.title} />
-                                <button onClick={() => handleRemoveCards(index)} >Remove Cards</button>
+                                <div className={styles.control}>
+                                    <button className={styles.button} onClick={() => handleRemoveCards(index)} >Remove Cards</button>
+                                </div>
                             </li>
                         )
                     })}
                 </ul>
             </div>
-            <div>
-                <button onClick={handleRemoveList}>Remove List</button>
+            <div className={styles.control}>
+                <button className={styles.button} onClick={handleRemoveList}>Remove List</button>
             </div>
         </div>
     )
