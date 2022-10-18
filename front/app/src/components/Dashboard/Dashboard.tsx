@@ -18,7 +18,7 @@ const MemorizedCard = React.memo(function Card(props: CardProps) {
                 {props.title}
             </div>
             <div>
-                <label>body:</label>
+                <label className={styles.label}>body:</label>
                 {props.body}
             </div>
         </div>
@@ -140,6 +140,8 @@ function Dashboard() {
             <div>
                 <div className={styles.control}>
                     <label className={styles.label}>title</label>
+                </div>
+                <div className={styles.control}>
                     <input className={styles.input} onChange={handleTitleChange}></input>
                 </div>
                 <div className={styles.control}>
