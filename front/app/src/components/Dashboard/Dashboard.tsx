@@ -49,7 +49,6 @@ function ListItem(props: ListItemProps) {
 
     const handleAddCards = () => {
         dispatch(createCard({ title: card.title, body: card.body, list_id: props.list.id }))
-        setCard({ title: "", body: "" })
     }
 
     const handleRemoveCards = (index: number) => {
